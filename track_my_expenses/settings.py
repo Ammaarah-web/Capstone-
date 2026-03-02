@@ -36,8 +36,11 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG =  "DEVELOPMENT" in os.environ
 
 ALLOWED_HOSTS = [
+    'money-map-422d80e8e44a.herokuapp.com',
     'money-map.git',
     'money-map.herokuapp.com',
+    'localhost',
+    '127.0.0.1',
 ]
 
 CSRF_TRUSTED_ORIGINS = [ 'https://*.herokuapp.com']
