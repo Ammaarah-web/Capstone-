@@ -1,11 +1,25 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from django.contrib.auth.forms import UserCreationForm
 
 class HomePage(TemplateView):
 	"""
 	Displays home page
 	"""
 	template_name = 'index.html'
+
+# User registration view
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'register.html', {'form': form})
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Expense
