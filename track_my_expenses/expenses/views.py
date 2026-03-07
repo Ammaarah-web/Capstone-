@@ -29,7 +29,19 @@ from .forms import ExpenseForm
 @login_required
 def dashboard(request):
 	expenses = Expense.objects.filter(user=request.user).order_by('-date')
-	return render(request, 'expenses/dashboard.html', {'expenses': expenses})
+	# Calculate totals per category
+	from collections import defaultdict
+	category_totals = defaultdict(float)
+	for expense in expenses:
+		if expense.category:
+			category_totals[expense.category.name] += float(expense.amount)
+	categories = list(category_totals.keys())
+	totals = list(category_totals.values())
+	return render(request, 'expenses/dashboard.html', {
+		'expenses': expenses,
+		'categories': categories,
+		'totals': totals
+	})
 
 # Add expense view
 @login_required
