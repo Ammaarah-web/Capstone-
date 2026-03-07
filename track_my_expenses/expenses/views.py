@@ -29,7 +29,7 @@ from .forms import ExpenseForm
 @login_required
 def dashboard(request):
 	expenses = Expense.objects.filter(user=request.user).order_by('-date')
-	return render(request, 'dashboard.html', {'expenses': expenses})
+	return render(request, 'expenses/dashboard.html', {'expenses': expenses})
 
 # Add expense view
 @login_required

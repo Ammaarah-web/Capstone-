@@ -89,7 +89,11 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'track_my_expenses.wsgi.application'
+
+# Redirect users to dashboard after login
+LOGIN_REDIRECT_URL = 'dashboard'
 
 
 # Database
