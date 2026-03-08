@@ -1,5 +1,11 @@
 from django import forms
-from .models import Expense, Category
+from .models import Budget, Expense, Category
+
+# Form for Budget model
+class BudgetForm(forms.ModelForm):
+    class Meta:
+        model = Budget
+        fields = ['category', 'monthly_limit']
 
 # Form for Expense model
 class ExpenseForm(forms.ModelForm):

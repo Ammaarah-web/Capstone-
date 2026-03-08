@@ -16,4 +16,8 @@ urlpatterns = [
     path('accounts/login/', RedirectView.as_view(url='/login/', permanent=False)),
     path('monthly/', views.monthly_report, name='monthly_report'),
     path('category/', views.category_report, name='category_report'),
+    path('budgets/', views.budgets, name='budgets'),
+    path('add_budget/', views.add_budget, name='add_budget'),
+    path('edit_budget/<int:budget_id>/', views.edit_budget, name='edit_budget'),
+    path('delete_budget/<int:budget_id>/', views.delete_budget, name='delete_budget'),
 ]
