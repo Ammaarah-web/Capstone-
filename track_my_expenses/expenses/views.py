@@ -33,7 +33,9 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def monthly_report(request):
-	expenses = Expense.objects.filter(user=request.user)
+	import datetime
+	year = request.GET.get('year', '2026')
+	expenses = Expense.objects.filter(user=request.user, date__year=year)
 	monthly = (
 		expenses
 		.annotate(month=TruncMonth('date'))
@@ -47,10 +49,15 @@ def monthly_report(request):
 		{'label': label, 'total': total}
 		for label, total in zip(monthly_labels, monthly_data)
 	]
+	# Get all years with expenses for dropdown
+	all_years = Expense.objects.filter(user=request.user).dates('date', 'year')
+	available_years = sorted(set([y.year for y in all_years]), reverse=True)
 	return render(request, 'monthly_report.html', {
 		'monthly_labels': monthly_labels,
 		'monthly_data': monthly_data,
 		'monthly_list': monthly_list,
+		'selected_year': int(year),
+		'available_years': available_years,
 	})
 # Calculate total spending per month and pass to dashboard.html
 from django.db.models import Sum
@@ -65,7 +72,7 @@ from django.contrib.auth.decorators import login_required
 # Dashboard view: list user's expenses and monthly totals
 @login_required
 def dashboard(request):
-	expenses = Expense.objects.filter(user=request.user).order_by('-date')
+	expenses = Expense.objects.filter(user=request.user).order_by('date')
 	# Calculate totals per month
 	monthly = (
 		expenses
@@ -128,10 +135,21 @@ def dashboard(request):
 		total = category_totals[cat]
 		percent = round((total / total_spending) * 100, 2) if total_spending > 0 else 0
 		category_data.append({'category': cat, 'total': total, 'percent': percent})
+
+	# Line chart dataset: spending over time
+	date_totals = defaultdict(float)
+	for expense in expenses:
+		date_str = expense.date.strftime('%Y-%m-%d')
+		date_totals[date_str] += float(expense.amount)
+	date_labels = list(date_totals.keys())
+	daily_totals = list(date_totals.values())
+
 	return render(request, 'expenses/dashboard.html', {
 		'expenses': expenses,
 		'category_data': category_data,
-		'total_spending': total_spending
+		'total_spending': total_spending,
+		'date_labels': date_labels,
+		'daily_totals': daily_totals
 	})
 
 # Add expense view
@@ -143,7 +161,13 @@ def add_expense(request):
 			expense = form.save(commit=False)
 			expense.user = request.user
 			expense.save()
-			return redirect('dashboard')
+			if 'save_add' in request.POST:
+				return redirect('add_expense')
+			else:
+				return redirect('dashboard')
+		else:
+			# Show form with errors
+			return render(request, 'add_expense.html', {'form': form})
 	else:
 		form = ExpenseForm()
 	return render(request, 'add_expense.html', {'form': form})

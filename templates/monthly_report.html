@@ -2,8 +2,18 @@
 {% block content %}
 <div class="container mt-4">
     <h2>Monthly Spending Report</h2>
-    <div class="mb-4" style="max-width: 600px;">
-        <canvas id="monthlyBarChart" width="600" height="300"></canvas>
+    <form method="get" class="mb-3">
+        <label for="year">Select Year:</label>
+        <select name="year" id="year" onchange="this.form.submit()">
+            {% for year in available_years %}
+                <option value="{{ year }}" {% if year == selected_year %}selected{% endif %}>{{ year }}</option>
+            {% endfor %}
+        </select>
+    </form>
+    <div class="mb-4" style="overflow-x: auto;">
+        <div style="min-width: 600px; width: 1200px;">
+            <canvas id="monthlyBarChart" width="1200" height="300"></canvas>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
@@ -15,7 +25,7 @@
             data: {
                 labels: monthlyLabels,
                 datasets: [{
-                    label: 'Total Spending',
+                    label: 'Total Spending (£)',
                     data: monthlyData,
                     backgroundColor: '#36A2EB',
                 }]
@@ -50,7 +60,7 @@
             {% for item in monthly_list %}
             <tr>
                 <td>{{ item.label }}</td>
-                <td>${{ item.total }}</td>
+                <td>£{{ item.total }}</td>
             </tr>
             {% endfor %}
         </tbody>

@@ -6,12 +6,54 @@
             <div></div>
     </div>
     <a href="{% url 'add_expense' %}" class="btn btn-primary mb-3">Add New Expense</a>
-    <h4>Total Spending: ${{ total_spending }}</h4>
+    <h4>Total Spending: £{{ total_spending }}</h4>
+    <div class="mb-4">
+        <h5>Spending Over Time</h5>
+        <div style="max-width: 600px;">
+            <canvas id="lineChart" width="600" height="300"></canvas>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            const dateLabels = {{ date_labels|safe }};
+            const dailyTotals = {{ daily_totals|safe }};
+            const ctx = document.getElementById('lineChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dateLabels,
+                    datasets: [{
+                        label: 'Daily Spending',
+                        data: dailyTotals,
+                        borderColor: '#36A2EB',
+                        backgroundColor: 'rgba(54,162,235,0.2)',
+                        fill: true,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                        },
+                        title: {
+                            display: true,
+                            text: 'Spending Over Time'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    </div>
     <div class="mb-4">
         <h5>Spending by Category</h5>
         {% for item in category_data %}
             <div class="mb-2">
-                <strong>{{ item.category }}</strong>: ${{ item.total }} ({{ item.percent }}%)
+                <strong>{{ item.category }}</strong>: £{{ item.total }} ({{ item.percent }}%)
                 <div class="progress" style="height: 20px;">
                     <div class="progress-bar" role="progressbar" style="width: {{ item.percent }}%;" aria-valuenow="{{ item.percent }}" aria-valuemin="0" aria-valuemax="100">{{ item.percent }}%</div>
                 </div>
@@ -31,7 +73,7 @@
         <tbody>
             {% for expense in expenses %}
             <tr>
-                <td>{{ expense.amount }}</td>
+                <td>£{{ expense.amount }}</td>
                 <td>{{ expense.category.name }}</td>
                 <td>{{ expense.date }}</td>
                 <td>{{ expense.notes }}</td>

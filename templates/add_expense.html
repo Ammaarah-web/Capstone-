@@ -4,8 +4,58 @@
     <h2>Add Expense</h2>
     <form method="post" class="mb-3">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Save Expense</button>
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <div class="mb-3">
+            {{ form.amount.label_tag }} {{ form.amount }}
+        </div>
+        <div class="mb-3">
+            {{ form.category.label_tag }} {{ form.category }}
+        </div>
+        <div class="mb-3">
+            {{ form.date.label_tag }}
+            <div class="input-group">
+                {{ form.date }}
+                <span class="input-group-text" id="calendar-addon"><i class="bi bi-calendar"></i></span>
+            </div>
+        </div>
+        <div class="mb-3">
+            {{ form.notes.label_tag }} {{ form.notes }}
+        </div>
+            <!-- Bootstrap Icons and Datepicker JS -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+            <script>
+                $(function() {
+                    // Find the date input by its label
+                    var dateInput = $("input[name='date']");
+                    dateInput.datepicker({
+                        format: 'yyyy-mm-dd',
+                        autoclose: true,
+                        todayHighlight: true
+                    });
+                    // Optional: open calendar when icon is clicked
+                    $('#calendar-addon').on('click', function() {
+                        dateInput.datepicker('show');
+                    });
+                });
+            </script>
+        <button type="submit" class="btn btn-success" name="save">Save Expense</button>
+        <button type="submit" class="btn btn-primary" name="save_add">Save and Add Another Expense</button>
         <a href="{% url 'dashboard' %}" class="btn btn-secondary ml-2">Back to Dashboard</a>
     </form>
 </div>
