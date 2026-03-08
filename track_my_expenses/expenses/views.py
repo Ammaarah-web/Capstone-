@@ -32,15 +32,23 @@ def dashboard(request):
 	# Calculate totals per category
 	from collections import defaultdict
 	category_totals = defaultdict(float)
+	total_spending = 0.0
 	for expense in expenses:
 		if expense.category:
 			category_totals[expense.category.name] += float(expense.amount)
+			total_spending += float(expense.amount)
 	categories = list(category_totals.keys())
 	totals = list(category_totals.values())
+	# Build a combined list for template iteration
+	category_data = []
+	for cat in categories:
+		total = category_totals[cat]
+		percent = round((total / total_spending) * 100, 2) if total_spending > 0 else 0
+		category_data.append({'category': cat, 'total': total, 'percent': percent})
 	return render(request, 'expenses/dashboard.html', {
 		'expenses': expenses,
-		'categories': categories,
-		'totals': totals
+		'category_data': category_data,
+		'total_spending': total_spending
 	})
 
 # Add expense view
