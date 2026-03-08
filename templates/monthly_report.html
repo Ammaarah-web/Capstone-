@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Monthly Spending Report</h2>
+    <div class="mb-4" style="max-width: 600px;">
+        <canvas id="monthlyBarChart" width="600" height="300"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const monthlyLabels = {{ monthly_labels|safe }};
+        const monthlyData = {{ monthly_data|safe }};
+        const ctx = document.getElementById('monthlyBarChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: monthlyLabels,
+                datasets: [{
+                    label: 'Total Spending',
+                    data: monthlyData,
+                    backgroundColor: '#36A2EB',
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: true,
+                        text: 'Monthly Spending'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Total Spending</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in monthly_list %}
+            <tr>
+                <td>{{ item.label }}</td>
+                <td>${{ item.total }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

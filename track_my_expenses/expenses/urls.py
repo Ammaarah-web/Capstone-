@@ -14,4 +14,6 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html', next_page=None), name='logout'),
     path('accounts/login/', RedirectView.as_view(url='/login/', permanent=False)),
+    path('monthly/', views.monthly_report, name='monthly_report'),
+    path('category/', views.category_report, name='category_report'),
 ]

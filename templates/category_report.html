@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Spending By Category Report</h2>
+    <div class="mb-4" style="max-width: 400px;">
+        <canvas id="categoryPieChart" width="400" height="400"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const categoryData = {{ category_data|safe }};
+        const categories = categoryData.map(item => item.category);
+        const totals = categoryData.map(item => item.total);
+        const ctx = document.getElementById('categoryPieChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: categories,
+                datasets: [{
+                    data: totals,
+                    backgroundColor: [
+                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#C9CBCF'
+                    ],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Expense Distribution by Category'
+                    }
+                }
+            }
+        });
+    </script>
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Total Spending</th>
+                <th>Percent</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in category_data %}
+            <tr>
+                <td>{{ item.category }}</td>
+                <td>${{ item.total }}</td>
+                <td>{{ item.percent }}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
