@@ -1,3 +1,12 @@
+/* ...existing code... */
 h1 {
     color: red;
+}
+
+.card {
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
 }

@@ -1,25 +1,102 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container mt-4">
-    <h2>Spending By Category Report</h2>
-    <div class="mb-4" style="max-width: 400px;">
-        <canvas id="categoryPieChart" width="400" height="400"></canvas>
+    <h2 class="mb-5">Spending By Category Report</h2>
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <form method="get">
+                <label for="month" class="form-label">Filter by Month:</label>
+                <select name="month" id="month" class="form-select w-auto d-inline-block" onchange="this.form.submit()">
+                    <option value="">All Months</option>
+                    <option value="1" {% if selected_month == '1' %}selected{% endif %}>January</option>
+                    <option value="2" {% if selected_month == '2' %}selected{% endif %}>February</option>
+                    <option value="3" {% if selected_month == '3' %}selected{% endif %}>March</option>
+                    <option value="4" {% if selected_month == '4' %}selected{% endif %}>April</option>
+                    <option value="5" {% if selected_month == '5' %}selected{% endif %}>May</option>
+                    <option value="6" {% if selected_month == '6' %}selected{% endif %}>June</option>
+                    <option value="7" {% if selected_month == '7' %}selected{% endif %}>July</option>
+                    <option value="8" {% if selected_month == '8' %}selected{% endif %}>August</option>
+                    <option value="9" {% if selected_month == '9' %}selected{% endif %}>September</option>
+                    <option value="10" {% if selected_month == '10' %}selected{% endif %}>October</option>
+                    <option value="11" {% if selected_month == '11' %}selected{% endif %}>November</option>
+                    <option value="12" {% if selected_month == '12' %}selected{% endif %}>December</option>
+                </select>
+            </form>
+        </div>
+    </div>
+    <div class="row mb-5 align-items-stretch">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm p-2 text-center h-100" style="min-height: 120px;">
+                <div class="text-muted" style="font-size: 0.95rem;">Total Spending</div>
+                <div class="fw-bold" style="font-size: 1.5rem;">£{{ total_spending|floatformat:2 }}</div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm p-2 text-center h-100" style="min-height: 120px;">
+                <div class="text-muted" style="font-size: 0.95rem;">Top Category</div>
+                <div class="fw-bold" style="font-size: 1.2rem;">{{ highest_category|default:'N/A' }}</div>
+                <div class="fs-6" style="font-size: 1rem;">£{{ highest_total|floatformat:2 }}</div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm p-2 text-center h-100" style="min-height: 120px;">
+                <div class="text-muted" style="font-size: 0.95rem;">Categories</div>
+                <div class="fw-bold" style="font-size: 1.5rem;">{{ num_categories }}</div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mb-4 text-center">Category Spending Insights</h4>
+    <div class="row g-4 mb-5 pb-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm p-2" style="height: 350px; display: flex; align-items: center; justify-content: center;">
+                <canvas id="categoryPieChart" width="320" height="320"></canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm p-2" style="height: 350px; display: flex; align-items: center; justify-content: center;">
+                <canvas id="categoryBarChart" width="320" height="320"></canvas>
+            </div>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        // Pie chart with gradient and hover shadow
         const categoryData = {{ category_data|safe }};
-        const categories = categoryData.map(item => item.category);
-        const totals = categoryData.map(item => item.total);
-        const ctx = document.getElementById('categoryPieChart').getContext('2d');
-        new Chart(ctx, {
+        const categories = {{ category_labels|safe }};
+        const totals = {{ category_totals|safe }};
+        const pieCtx = document.getElementById('categoryPieChart').getContext('2d');
+
+        // Create gradient backgrounds for pie chart
+        const pieGradients = [
+            pieCtx.createLinearGradient(0, 0, 400, 0),
+            pieCtx.createLinearGradient(0, 0, 0, 400),
+            pieCtx.createLinearGradient(0, 0, 400, 400),
+            pieCtx.createLinearGradient(0, 400, 400, 0),
+            pieCtx.createLinearGradient(0, 0, 200, 400),
+            pieCtx.createLinearGradient(0, 0, 400, 200),
+            pieCtx.createLinearGradient(0, 0, 400, 100)
+        ];
+        pieGradients[0].addColorStop(0, '#FF6384'); pieGradients[0].addColorStop(1, '#FF8C94');
+        pieGradients[1].addColorStop(0, '#36A2EB'); pieGradients[1].addColorStop(1, '#90CAF9');
+        pieGradients[2].addColorStop(0, '#FFCE56'); pieGradients[2].addColorStop(1, '#FFF59D');
+        pieGradients[3].addColorStop(0, '#4BC0C0'); pieGradients[3].addColorStop(1, '#B2DFDB');
+        pieGradients[4].addColorStop(0, '#9966FF'); pieGradients[4].addColorStop(1, '#B39DDB');
+        pieGradients[5].addColorStop(0, '#FF9F40'); pieGradients[5].addColorStop(1, '#FFCC80');
+        pieGradients[6].addColorStop(0, '#C9CBCF'); pieGradients[6].addColorStop(1, '#ECEFF1');
+
+        new Chart(pieCtx, {
             type: 'pie',
             data: {
                 labels: categories,
                 datasets: [{
                     data: totals,
-                    backgroundColor: [
-                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#C9CBCF'
-                    ],
+                    backgroundColor: pieGradients,
+                    borderColor: '#fff',
+                    borderWidth: 2,
+                    hoverOffset: 12,
+                    hoverBorderColor: '#888',
+                    hoverBorderWidth: 3,
                 }]
             },
             options: {
@@ -31,7 +108,83 @@
                     title: {
                         display: true,
                         text: 'Expense Distribution by Category'
+                    },
+                    tooltip: {
+                        boxPadding: 4
                     }
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                },
+                layout: {
+                    padding: 10
+                }
+            }
+        });
+
+        // Horizontal bar chart with gradient and shadow
+        const barCtx = document.getElementById('categoryBarChart').getContext('2d');
+        // Create a horizontal gradient for bars
+        const barGradient = barCtx.createLinearGradient(0, 0, 400, 0);
+        barGradient.addColorStop(0, '#36A2EB');
+        barGradient.addColorStop(1, '#B2DFDB');
+
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: categories,
+                datasets: [{
+                    label: 'Total Spending',
+                    data: totals,
+                    backgroundColor: barGradient,
+                    borderColor: '#1e88e5',
+                    borderWidth: 2,
+                    hoverBackgroundColor: '#1976d2',
+                    hoverBorderColor: '#333',
+                    hoverBorderWidth: 3,
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Total Spending by Category'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '£' + context.parsed.x.toFixed(2);
+                            }
+                        },
+                        boxPadding: 4
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '£' + value;
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0,0,0,0.05)'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: 'rgba(0,0,0,0.05)'
+                        }
+                    }
+                },
+                layout: {
+                    padding: 10
                 }
             }
         });

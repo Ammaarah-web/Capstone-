@@ -86,7 +86,12 @@ def budgets(request):
 # Category report view for spending by category
 
 def category_report(request):
+	from datetime import date
+	selected_month = request.GET.get('month')
+	current_year = date.today().year
 	expenses = Expense.objects.filter(user=request.user).order_by('-date')
+	if selected_month:
+		expenses = expenses.filter(date__month=int(selected_month), date__year=current_year)
 	category_totals = defaultdict(float)
 	total_spending = 0.0
 	for expense in expenses:
@@ -100,8 +105,25 @@ def category_report(request):
 		total = category_totals[cat]
 		percent = round((total / total_spending) * 100, 2) if total_spending > 0 else 0
 		category_data.append({'category': cat, 'total': total, 'percent': percent})
+
+	# Summary statistics
+	highest_category = None
+	highest_total = 0.0
+	if category_totals:
+		highest_category = max(category_totals, key=category_totals.get)
+		highest_total = category_totals[highest_category]
+	num_categories = len(categories)
+
+	category_labels = categories
+	category_totals = totals
 	return render(request, 'category_report.html', {
 		'category_data': category_data,
+		'total_spending': total_spending,
+		'highest_category': highest_category,
+		'highest_total': highest_total,
+		'num_categories': num_categories,
+		'category_labels': category_labels,
+		'category_totals': category_totals,
 	})
 
 
