@@ -1,84 +1,83 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Dashboard</h2>
-            <div></div>
+    <!-- Removed duplicate Dashboard heading -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Dashboard</h2>
+        <a href="{% url 'add_expense' %}" class="btn btn-primary">Add New Expense</a>
     </div>
-    <a href="{% url 'add_expense' %}" class="btn btn-primary mb-3">Add New Expense</a>
     <h4>Total Spending: £{{ total_spending }}</h4>
-    <div class="mb-4">
-        <h5>Spending Over Time</h5>
-        <div style="max-width: 600px;">
-            <canvas id="lineChart" width="600" height="300"></canvas>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-            const dateLabels = {{ date_labels|safe }};
-            const dailyTotals = {{ daily_totals|safe }};
-            const ctx = document.getElementById('lineChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: dateLabels,
-                    datasets: [{
-                        label: 'Daily Spending',
-                        data: dailyTotals,
-                        borderColor: '#36A2EB',
-                        backgroundColor: 'rgba(54,162,235,0.2)',
-                        fill: true,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: true,
+    <div class="row mb-4">
+        <div class="col-md-8 mb-4">
+            <div class="card shadow-sm p-3">
+                <div style="max-width: 100%;">
+                    <canvas id="lineChart" width="600" height="300"></canvas>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                    const chartDates = {{ chart_dates|safe }};
+                    const chartTotals = {{ chart_totals|safe }};
+                    const ctx = document.getElementById('lineChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: chartDates,
+                            datasets: [{
+                                label: 'Daily Spending',
+                                data: chartTotals,
+                                borderColor: '#36A2EB',
+                                backgroundColor: 'rgba(54,162,235,0.15)',
+                                fill: true,
+                                tension: 0.3
+                            }]
                         },
-                        title: {
-                            display: true,
-                            text: 'Spending Over Time'
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Spending Over Time'
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    ticks: {
+                                        maxTicksLimit: 6
+                                    }
+                                },
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
                         }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        </script>
-    </div>
-    <div class="mb-4">
-        <h5>Budgets Overview</h5>
-        <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-8 col-sm-12">
-                {% for budget in budgets %}
-                <div class="mb-4">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <strong>{{ budget.category|default:'Unknown' }}</strong>
-                        <span>£{{ budget.total_spent|floatformat:2|default:'0.00' }} / £{{ budget.monthly_limit|floatformat:2|default:'0.00' }}</span>
-                    </div>
-                        <div class="mb-2">
-                            <div class="progress" style="height: 20px;">
-                                <div class="progress-bar 
-                                    {% if budget.progress < 50 %}bg-success
-                                    {% elif budget.progress < 80 %}bg-warning
-                                    {% else %}bg-danger
-                                    {% endif %} progress-bar-striped"
-                                    role="progressbar" 
-                                    style="width: {{ budget.progress|floatformat:0 }}%;" 
-                                    aria-valuenow="{{ budget.progress|floatformat:0 }}" aria-valuemin="0" aria-valuemax="100">
-                                    {{ budget.progress|floatformat:0 }}%
-                                </div>
-                    </div>
-                    <div>
-                        <strong>Remaining:</strong> £{{ budget.monthly_limit|floatformat:2|add:'-'|add:budget.total_spent|floatformat:2|default:'0.00' }}
+                    });
+                </script>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm p-3">
+                <h5>Budget Overview</h5>
+                <div class="mb-3">
+                    <strong>Total Budget Used</strong>
+                    <span class="float-end">£{{ total_spent|floatformat:2 }} / £{{ total_budget|floatformat:2 }} used</span>
+                    <div class="progress mt-2" style="height: 20px;">
+                        <div class="progress-bar bg-danger progress-bar-striped" role="progressbar" style="width: {{ spent_percent|floatformat:0 }}%;" aria-valuenow="{{ spent_percent|floatformat:0 }}" aria-valuemin="0" aria-valuemax="100">
+                            {{ spent_percent|floatformat:0 }}%
+                        </div>
                     </div>
                 </div>
-                {% empty %}
-                <div class="alert alert-info">No budgets found.</div>
-                {% endfor %}
+                <div>
+                    <strong>Remaining Budget</strong>
+                    <span class="float-end">£{{ remaining_budget|floatformat:2 }} remaining</span>
+                    <div class="progress mt-2" style="height: 20px;">
+                        <div class="progress-bar bg-success progress-bar-striped" role="progressbar" style="width: {{ remaining_percent|floatformat:0 }}%;" aria-valuenow="{{ remaining_percent|floatformat:0 }}" aria-valuemin="0" aria-valuemax="100">
+                            {{ remaining_percent|floatformat:0 }}%
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

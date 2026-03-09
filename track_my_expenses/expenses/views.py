@@ -152,44 +152,36 @@ def dashboard(request):
 
 	from decimal import Decimal
 	user_budgets = Budget.objects.filter(user=request.user)
-	budget_data = []
-	today = date.today()
-	for budget in user_budgets:
-		spent = Expense.objects.filter(
-			user=request.user,
-			category=budget.category,
-			date__year=today.year,
-			date__month=today.month
-		).aggregate(total=Sum('amount'))['total'] or Decimal('0.00')
-		monthly_limit = budget.monthly_limit if budget.monthly_limit else Decimal('0.00')
-		percent_used = float((spent / monthly_limit) * 100) if monthly_limit > 0 else 0
-		progress = min(percent_used, 100)
-		budget_data.append({
-			'id': budget.id,
-			'category': budget.category.name,
-			'monthly_limit': float(monthly_limit),
-			'total_spent': float(spent),
-			'percent_used': percent_used,
-			'progress': progress
-		})
+	# Calculate total budget and total spent
+	total_budget = user_budgets.aggregate(total=Sum('monthly_limit'))['total'] or Decimal('0.00')
+	total_spent = expenses.aggregate(total=Sum('amount'))['total'] or Decimal('0.00')
+	remaining_budget = total_budget - total_spent
+	spent_percent = float((total_spent / total_budget) * 100) if total_budget > 0 else 0
+	remaining_percent = float((remaining_budget / total_budget) * 100) if total_budget > 0 else 0
 
-	# Line chart dataset: spending over time
-	from collections import defaultdict
-	date_totals = defaultdict(float)
-	for expense in expenses:
-		date_str = expense.date.strftime('%Y-%m-%d')
-		date_totals[date_str] += float(expense.amount)
-	date_labels = list(date_totals.keys())
-	daily_totals = list(date_totals.values())
+	# Line chart dataset: daily spending totals
+	from django.db.models.functions import TruncDate
+	daily = (
+		expenses
+		.annotate(day=TruncDate('date'))
+		.values('day')
+		.annotate(total=Sum('amount'))
+		.order_by('day')
+	)
+	chart_dates = [item['day'].strftime('%b %d') for item in daily]
+	chart_totals = [float(item['total']) for item in daily]
 
 	return render(request, 'expenses/dashboard.html', {
 		'expenses': expenses,
 		'monthly_labels': monthly_labels,
 		'monthly_data': monthly_data,
-		'budgets': budget_data,
-		'date_labels': date_labels,
-		'daily_totals': daily_totals,
-		'budgets': budget_data,
+		'total_budget': total_budget,
+		'total_spent': total_spent,
+		'remaining_budget': remaining_budget,
+		'spent_percent': spent_percent,
+		'remaining_percent': remaining_percent,
+		'chart_dates': chart_dates,
+		'chart_totals': chart_totals,
 	})
 
 
