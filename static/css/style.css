@@ -1,3 +1,59 @@
+    margin-top: 100px !important; /* Ensures all page content starts below navbar */
+/* Fantasy-themed Navbar Styling */
+.navbar {
+    width: 100vw;
+    background: rgba(90, 15, 29, 0.85);
+    color: #d4af37;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.navbar a, .navbar .nav-link, .navbar .navbar-brand {
+    color: #d4af37 !important;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 0 0.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.navbar a:hover, .navbar .nav-link:hover, .navbar .navbar-brand:hover {
+    color: #fff !important;
+    background: rgba(212,175,55,0.1);
+    box-shadow: 0 0 10px rgba(212,175,55,0.6);
+}
+
+/* Fantasy-themed Button Styling */
+button, .btn, input[type="submit"], input[type="button"], .nav-btn {
+    background: rgba(90, 15, 29, 0.9);
+    border: 2px solid #d4af37;
+    color: #d4af37;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: none;
+}
+
+button:hover, .btn:hover, input[type="submit"]:hover, input[type="button"]:hover, .nav-btn:hover {
+    background: #7c1f2d;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(212,175,55,0.6);
+}
 /* ...existing code... */
 h1 {
     color: red;
@@ -11,6 +67,177 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    font-family: 'IM Fell English', Georgia, serif;
+    color: #000;
+    background: #fff;
+    padding-top: 80px; /* Push content further below navbar */
+    position: relative;
+    padding-top: 64px; /* Ensures headings and content are visible below navbar */
+}
+
+/* Overlay to darken background for readability */
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.3);
+    z-index: 0;
+}
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    background: rgba(90, 15, 29, 0.95); /* Maroon with more opacity for visibility */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 2;
+}
+
+.site-title {
+    font-size: 2rem;
+    color: #d4af37;
+    font-family: 'IM Fell English', Georgia, serif;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 8px #5a0f1d;
+}
+
+.navbar-right {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-btn {
+    padding: 0.5rem 1.2rem;
+    border: 2px solid #d4af37;
+    background: transparent;
+    color: #d4af37;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-family: 'IM Fell English', Georgia, serif;
+    text-decoration: none;
+    transition: box-shadow 0.2s, background 0.2s, color 0.2s;
+    box-shadow: 0 0 8px rgba(212,175,55,0.2);
+}
+
+.nav-btn:hover {
+    background: rgba(212,175,55,0.1);
+    color: #fff;
+    box-shadow: 0 0 16px #d4af37;
+}
+
+/* Center Content */
+.center-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+}
+
+.welcome-section {
+    background: rgba(90, 15, 29, 0.85);
+    border-radius: 24px;
+    padding: 3rem 2rem;
+    box-shadow: 0 0 32px rgba(90,15,29,0.3);
+    text-align: center;
+    max-width: 480px;
+    width: 90vw;
+    margin-top: 80px; /* Space below navbar */
+}
+
+.welcome-heading {
+    font-size: 2.5rem;
+    color: #d4af37;
+    font-family: 'IM Fell English', Georgia, serif;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 12px #5a0f1d;
+}
+
+.welcome-desc {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 2rem;
+    text-shadow: 0 1px 6px #5a0f1d;
+}
+
+.center-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.main-btn {
+    padding: 1rem 2rem;
+    border: 2px solid #d4af37;
+    background: #5a0f1d;
+    color: #fff;
+    border-radius: 24px;
+    font-size: 1.2rem;
+    font-family: 'IM Fell English', Georgia, serif;
+    text-decoration: none;
+    transition: box-shadow 0.2s, background 0.2s, color 0.2s;
+    box-shadow: 0 0 12px rgba(212,175,55,0.2);
+}
+
+.main-btn:hover {
+    background: #7c1f2d;
+    color: #d4af37;
+    box-shadow: 0 0 24px #d4af37;
+}
+
+.page-links {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: #d4af37;
+}
+
+.page-links a {
+    color: #d4af37;
+    text-decoration: underline;
+    margin: 0 0.3rem;
+    font-family: 'IM Fell English', Georgia, serif;
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+    .welcome-section {
+        padding: 2rem 1rem;
+        max-width: 90vw;
+    }
+    .welcome-heading {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        padding: 0.8rem 1rem;
+    }
+    .site-title {
+        font-size: 1.3rem;
+    }
+    .welcome-section {
+        padding: 1rem 0.5rem;
+        max-width: 98vw;
+    }
+    .welcome-heading {
+        font-size: 1.2rem;
+    }
+    .main-btn {
+        font-size: 1rem;
+        padding: 0.7rem 1.2rem;
+    }
+}
+height: 100vh;
     font-family: 'IM Fell English', Georgia, serif;
     color: #fff;
     background: url('/static/images/Money-map.png') no-repeat center center fixed;

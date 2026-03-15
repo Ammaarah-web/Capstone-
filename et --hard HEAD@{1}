@@ -1,0 +1,27 @@
+[33me3cbb77[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31mheroku/main[m[33m)[m HEAD@{0}: reset: moving to origin/main
+[33m30325ed[m HEAD@{1}: commit: add a index (homepage), with background image and css styling for buttons and navbar - add a pop up modal
+[33me3cbb77[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31mheroku/main[m[33m)[m HEAD@{2}: reset: moving to origin/main
+[33me3cbb77[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31mheroku/main[m[33m)[m HEAD@{3}: commit: fixed catgeory page- added another bar chart adjusted spacing, added summary cards, and filter by month option, made charts responsive e.g. hover effects etc
+[33m8dac845[m HEAD@{4}: commit: fixed layout of the dashboard, rpelaced progress bars to match original design in the wireframe, added cards to have the line chart and the progress bars side by side
+[33m7e55ffe[m HEAD@{5}: commit: add budget page, replace progress bars - for budget progress bars, and fix issues
+[33m37fbf06[m HEAD@{6}: commit: add line chart to hsow obver time spending, fix monthly bar charts - add a scrollbar, add a save and add another expense button
+[33mc24193a[m HEAD@{7}: commit: add bar charts and move pie chart to its own page
+[33m2853f59[m HEAD@{8}: commit: add budget progress bars- needs adjusting
+[33m493ce69[m HEAD@{9}: commit: add pie chart to dashboard
+[33mfa0211b[m HEAD@{10}: commit: add register button to nav bar
+[33ma56836c[m HEAD@{11}: commit: delete expense, edit expense, navigation buttons and html sorted
+[33m0bbce4c[m HEAD@{12}: commit: login and logout ensure both are functioning - and urls are connected
+[33ma423dcc[m HEAD@{13}: commit: create django view for user registration and update url/ registartion routes
+[33me3f2830[m HEAD@{14}: commit: template for adding a new expense
+[33mec2b76e[m HEAD@{15}: commit: bootstrap styled dashboard template, html added
+[33m65f226c[m HEAD@{16}: commit: set up URL patterns for expense tracker
+[33m8f8d355[m HEAD@{17}: commit: create django model forms
+[33m6e18dcd[m HEAD@{18}: commit: create and register category and expense model to admin
+[33m0aada08[m HEAD@{19}: commit: Add Heroku domain to ALLOWED_HOSTS
+[33m91e2067[m HEAD@{20}: commit: Pin Python version to 3.12.8 for Heroku
+[33m6cb715b[m HEAD@{21}: commit: Unpin setuptools and add wheel for Heroku
+[33m8ec4d6f[m HEAD@{22}: commit: remove duplicate static file
+[33md7a3b3b[m HEAD@{23}: commit: Deployment Commit
+[33mb490abb[m HEAD@{24}: commit (merge): Merge remote-tracking branch 'origin/main' into local main
+[33mba0b672[m HEAD@{25}: Branch: renamed refs/heads/master to refs/heads/main
+[33mba0b672[m HEAD@{27}: commit (initial): Initial commit for Heroku and GitHub
