@@ -4,10 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Django-Setup</title>
+    <title>Money Map - Fantasy Expense Tracker</title>
+    <!-- Link to fantasy/serif font (Google Fonts or fallback) -->
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" >
 </head>
 <body>
-    <h1>Hello Django From Heroku</h1>
+    <!-- Overlay for darkening the background image -->
+    <div class="background-overlay"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span class="site-title">Money Map</span>
+        </div>
+        <div class="navbar-right">
+            <a href="/login" class="nav-btn">Login</a>
+            <a href="/register" class="nav-btn">Register</a>
+        </div>
+    </nav>
+
+    <!-- Centered Welcome Section -->
+    <main class="center-content">
+        <section class="welcome-section">
+            <h1 class="welcome-heading">Welcome to Your Money Map</h1>
+            <p class="welcome-desc">Track your expenses across the magical lands of your finances.</p>
+            <div class="center-buttons">
+                <a href="/login" class="main-btn">Enter Map</a>
+                <a href="/register" class="main-btn">Create Account</a>
+            </div>
+            <!-- Links to other pages -->
+            <div class="page-links">
+                <a href="/login">Sign In</a> |
+                <a href="/register">Register</a>
+            </div>
+        </section>
+    </main>
 </body>
 </html>

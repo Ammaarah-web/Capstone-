@@ -1,3 +1,6 @@
+# Homepage view
+def homepage(request):
+	return render(request, 'index.html')
 # Edit budget view
 def edit_budget(request, budget_id):
 	budget = get_object_or_404(Budget, id=budget_id, user=request.user)
