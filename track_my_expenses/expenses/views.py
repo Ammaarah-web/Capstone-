@@ -60,6 +60,9 @@ from datetime import date, datetime
 
 # Budgets view
 
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def budgets(request):
 	user_budgets = Budget.objects.filter(user=request.user)
 	budget_data = []
@@ -132,6 +135,9 @@ def category_report(request):
 
 # Monthly report view for spending per month
 
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def monthly_report(request):
 	year = request.GET.get('year', '2026')
 	expenses = Expense.objects.filter(user=request.user, date__year=year)
