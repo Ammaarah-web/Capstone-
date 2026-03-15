@@ -8,8 +8,21 @@
     <!-- Link to fantasy/serif font (Google Fonts or fallback) -->
     <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" >
+    <style>
+        .homepage-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url('{% static "images/Money-map.png" %}') no-repeat center center/cover;
+            z-index: 0;
+        }
+    </style>
 </head>
 <body>
+    <!-- Homepage background image -->
+    <div class="homepage-bg"></div>
     <!-- Overlay for darkening the background image -->
     <div class="background-overlay"></div>
 

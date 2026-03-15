@@ -6,9 +6,9 @@
         <a href="{% url 'add_budget' %}" class="btn btn-primary">Add Budget</a>
     </div>
     <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-8 col-sm-12">
-            {% for budget in budgets %}
-            <div class="card shadow-sm mb-4">
+        {% for budget in budgets %}
+        <div class="col-md-6 col-lg-6 mb-4">
+            <div class="card shadow-sm h-100">
                 <div class="card-body">
                     <h5 class="card-title">{{ budget.category }}</h5>
                     <p class="card-text mb-2">
@@ -38,10 +38,12 @@
                     </div>
                 </div>
             </div>
-            {% empty %}
-            <div class="alert alert-info">No budgets found.</div>
-            {% endfor %}
         </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">No budgets found.</div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
