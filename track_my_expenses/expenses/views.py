@@ -21,22 +21,12 @@ def delete_budget(request, budget_id):
 		return redirect('budgets')
 	return render(request, 'delete_expense.html', {'object': budget, 'type': 'budget'})
 # User registration view
-def register(request):
-	if request.method == 'POST':
-		form = UserCreationForm(request.POST)
-		if form.is_valid():
-			form.save()
-			return redirect('login')
-	else:
-		form = UserCreationForm()
-	return render(request, 'register.html', {'form': form})
 # Budgets view
 
 
 # All imports at the top
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from django.db.models.functions import TruncMonth

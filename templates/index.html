@@ -32,8 +32,8 @@
             <span class="site-title">Money Map</span>
         </div>
         <div class="navbar-right">
-            <a href="/login" class="nav-btn">Login</a>
-            <a href="/register" class="nav-btn">Register</a>
+              <a class="nav-btn" href="{% url 'account_login' %}">Login</a>
+              <a class="nav-btn" href="{% url 'account_signup' %}">Register</a>
         </div>
     </nav>
 
@@ -43,13 +43,13 @@
             <h1 class="welcome-heading">Welcome to Your Money Map</h1>
             <p class="welcome-desc">Track your expenses across the magical lands of your finances.</p>
             <div class="center-buttons">
-                <a href="/login" class="main-btn">Enter Map</a>
-                <a href="/register" class="main-btn">Create Account</a>
+                 <a class="main-btn" href="{% url 'account_login' %}">Enter Map</a>
+                 <a class="main-btn" href="{% url 'account_signup' %}">Create Account</a>
             </div>
             <!-- Links to other pages -->
             <div class="page-links">
-                <a href="/login">Sign In</a> |
-                <a href="/register">Register</a>
+                 <a href="{% url 'account_login' %}">Sign In</a> |
+                 <a href="{% url 'account_signup' %}">Register</a>
             </div>
         </section>
     </main>
