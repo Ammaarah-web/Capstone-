@@ -1,27 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <div class="container mt-4" style="margin-top: 100px;">
+
     <h2 class="mt-4 mb-2" style="padding-top: 18px;">Dashboard</h2>
+
     <div class="d-flex justify-content-end align-items-center mb-2" style="margin-top: -10px;">
         <a href="{% url 'add_expense' %}" class="btn btn-primary">Add New Expense</a>
-        <a href="{% url 'account_logout' %}" class="btn btn-danger ms-2">Logout</a>
     </div>
 
-
-    <!-- Responsive Dashboard Section: Progress Bars (left), Line Graph (right) -->
     <div class="row mb-4">
-        <!-- Line Graph Card: left column on desktop, top on mobile -->
         <div class="col-12 col-md-8 mb-3 mb-md-0">
             <div class="card shadow-sm p-3 h-100">
                 <div style="max-width: 100%; padding: 10px;">
                     <canvas id="lineChart" width="600" height="300"></canvas>
                 </div>
+
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <script>
-                    // Line graph showing daily spending
                     const chartDates = {{ chart_dates|safe }};
                     const chartTotals = {{ chart_totals|safe }};
                     const ctx = document.getElementById('lineChart').getContext('2d');
+
                     new Chart(ctx, {
                         type: 'line',
                         data: {
@@ -39,7 +39,7 @@
                             responsive: true,
                             plugins: {
                                 legend: {
-                                    display: true,
+                                    display: true
                                 },
                                 title: {
                                     display: true,
@@ -61,11 +61,11 @@
                 </script>
             </div>
         </div>
-        <!-- Budget Progress Bars Card: right column on desktop, bottom on mobile -->
+
         <div class="col-12 col-md-4">
             <div class="card shadow-sm p-3 h-100">
                 <h5 class="mb-4">Budget Progress</h5>
-                <!-- Progress Bar 1: Budget Used This Month -->
+
                 <div class="mb-4">
                     <div class="d-flex justify-content-between">
                         <span>Budget Used This Month</span>
@@ -73,12 +73,15 @@
                     </div>
                     <div class="progress mt-2">
                         <div class="progress-bar {% if spent_percent < 60 %}bg-success{% elif spent_percent < 85 %}bg-warning{% else %}bg-danger{% endif %}"
-                            role="progressbar"
-                            style="width: {{ spent_percent }}%;"
-                            aria-valuenow="{{ spent_percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+                             role="progressbar"
+                             style="width: {{ spent_percent }}%;"
+                             aria-valuenow="{{ spent_percent }}"
+                             aria-valuemin="0"
+                             aria-valuemax="100">
+                        </div>
                     </div>
                 </div>
-                <!-- Progress Bar 2: Remaining Budget This Month -->
+
                 <div class="mb-2">
                     <div class="d-flex justify-content-between">
                         <span>Remaining Budget This Month</span>
@@ -86,17 +89,19 @@
                     </div>
                     <div class="progress mt-2">
                         <div class="progress-bar {% if spent_percent < 60 %}bg-success{% elif spent_percent < 85 %}bg-warning{% else %}bg-danger{% endif %}"
-                            role="progressbar"
-                            style="width: {{ remaining_percent }}%;"
-                            aria-valuenow="{{ remaining_percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+                             role="progressbar"
+                             style="width: {{ remaining_percent }}%;"
+                             aria-valuenow="{{ remaining_percent }}"
+                             aria-valuemin="0"
+                             aria-valuemax="100">
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 
-    <!-- Expense Entries Section -->
-    <!-- Lists all expenses with Edit and Delete buttons -->
     <div class="row">
         <div class="col-md-12">
             <h5>Recent Expenses</h5>
@@ -112,23 +117,26 @@
                 </thead>
                 <tbody>
                     {% for expense in expenses %}
-                        <tr>
-                            <td>{{ expense.date }}</td>
-                            <td>{{ expense.category.name }}</td>
-                            <td>{{ expense.notes }}</td>
-                            <td>£{{ expense.amount }}</td>
-                            <td>
-                                <!-- Edit and Delete buttons for each expense -->
-                                <a href="{% url 'edit_expense' expense.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
-                                <a href="{% url 'delete_expense' expense.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>{{ expense.date }}</td>
+                        <td>{{ expense.category.name }}</td>
+                        <td>{{ expense.notes }}</td>
+                        <td>£{{ expense.amount }}</td>
+                        <td>
+                            <a href="{% url 'edit_expense' expense.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                            <a href="{% url 'delete_expense' expense.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                        </td>
+                    </tr>
                     {% empty %}
-                        <tr><td colspan="5">No expenses found.</td></tr>
+                    <tr>
+                        <td colspan="5">No expenses found.</td>
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
+
 </div>
+
 {% endblock %}

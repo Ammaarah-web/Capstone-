@@ -34,7 +34,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 100;
 }
 
 .navbar a, .navbar .nav-link, .navbar .navbar-brand {
@@ -67,6 +67,7 @@ button, .btn, input[type="submit"], input[type="button"], .nav-btn {
     letter-spacing: 1px;
     transition: all 0.3s ease;
     box-shadow: none;
+    z-index: 101;
 }
 
 button:hover, .btn:hover, input[type="submit"]:hover, input[type="button"]:hover, .nav-btn:hover {

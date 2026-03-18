@@ -58,10 +58,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary_storage',
     'cloudinary',
-    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'django.contrib.sites',
+    'django_extensions',
     # 'django_summernote', # Uncomment if used
 ]
 
@@ -98,9 +99,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'track_my_expenses.wsgi.application'
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 # Redirect users to dashboard after login
 SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
 
 
