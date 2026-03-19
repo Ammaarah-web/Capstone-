@@ -1,8 +1,9 @@
+# Money Map: Track my expenses
 ## Introduction
 
-Welcome to Track My Expenses, a comprehensive web application designed to help users efficiently manage their personal finances. This platform enables users to track their income, expenses, and budgets, providing insightful reports and visualizations to support better financial decision-making. Built with Django, Track My Expenses offers a user-friendly interface and robust functionality for both casual users and those seeking advanced budgeting tools.
+Welcome to Money Map, a comprehensive web application designed to help users efficiently manage their personal finances. This platform enables users to track their income, expenses, and budgets, providing insightful reports and visualizations to support better financial decision-making. Built with Django, Money Map offers a user-friendly interface and robust functionality for both casual users and those seeking advanced budgeting tools.
 
-Track My Expenses features a fully responsive design, ensuring seamless usability across desktops, tablets, and smartphones. The site is fantasy map themed, allowing you to “map” your expenses and budgets in a visually engaging way. More details on the theme will be added soon.
+Money Map features a fully responsive design, ensuring seamless usability across desktops, tablets, and smartphones. The site is fantasy map themed, allowing you to “map” your expenses and budgets in a visually engaging way. More details on the theme will be added soon.
 
 ## Features
 
@@ -18,7 +19,7 @@ Track My Expenses features a fully responsive design, ensuring seamless usabilit
 - **Data Backup**: Safeguard your financial data with backup options.
 - **Admin Panel**: For site administrators, manage users, categories, and expenses from a dedicated admin interface.
 
-Track My Expenses is designed to make financial tracking simple, insightful, and secure. Whether you want to monitor daily spending or plan for long-term goals, this site provides all the tools you need.
+Money Map is designed to make financial tracking simple, insightful, and secure. Whether you want to monitor daily spending or plan for long-term goals, this site provides all the tools you need.
 
 ## Project Diagram
 
@@ -47,7 +48,7 @@ The wireframes Above demonstrate the layout and user interface for both desktop 
 
 ## AI Assistance
 
-AI (GitHub Copilot) was used extensively throughout the development of Track My Expenses for both code generation and debugging. Copilot provided intelligent code suggestions, helped automate repetitive tasks, and assisted in troubleshooting errors. Every AI-generated code snippet was manually reviewed for accuracy, security, and suitability. When the suggestions met the project’s requirements, they were implemented and saved; otherwise, they were refined or replaced. This collaborative workflow between AI and manual review ensured high-quality, reliable code while accelerating development.
+AI (GitHub Copilot) was used extensively throughout the development of Money Map for both code generation and debugging. Copilot provided intelligent code suggestions, helped automate repetitive tasks, and assisted in troubleshooting errors. Every AI-generated code snippet was manually reviewed for accuracy, security, and suitability. When the suggestions met the project’s requirements, they were implemented and saved; otherwise, they were refined or replaced. This collaborative workflow between AI and manual review ensured high-quality, reliable code while accelerating development.
 
 Copilot also contributed to documentation, UI design, and feature planning, making the development process more efficient and creative. All final code and features were carefully checked and tested before deployment.
 
@@ -56,11 +57,29 @@ Copilot also contributed to documentation, UI design, and feature planning, maki
 
 ## CRUD Functionality
 
-Track My Expenses implements full CRUD (Create, Read, Update, Delete) functionality across its core features:
+Money Map implements full CRUD (Create, Read, Update, Delete) functionality across its core features:
 
 - **Create**: Users can add new expenses and budgets. The platform provides intuitive forms for entering details such as amount, date, description, and category. Categories are predefined and can be selected, but not created by users.
 - **Read**: All financial data can be viewed in dashboards, reports, and lists. Users can browse their expenses and budgets, and generate detailed reports for analysis. Categories are available for selection and reporting.
 - **Update**: Existing expenses and budgets can be edited. Users can modify details to correct mistakes or adjust their financial plans as needed. Category management (add/edit/delete) is restricted to administrators via the admin panel.
+
 - **Delete**: Users can remove expenses and budgets that are no longer relevant. Deletion is straightforward and helps keep records organized. Categories cannot be deleted by users; this is managed by administrators.
 
-This CRUD functionality ensures users have complete control over their financial data, while category management remains secure and centralized through the admin interface.
+With these features, Money Map empowers users to manage their finances confidently and efficiently, supporting both everyday tracking and long-term planning. The system is designed to be intuitive and secure, so users can focus on their goals without worrying about data management.
+
+
+## Notifications
+
+Money Map includes a notification system to enhance user experience and provide feedback. Users are notified each time an action is completed, such as:
+
+- Registration (account creation)
+- Login (confirmation of successful login)
+- Adding an expense (item created)
+- Deleting an expense (item deleted)
+- Editing an expense or budget
+
+These notifications confirm successful operations and help users stay informed about changes to their financial data. The notification system ensures clarity and transparency throughout the application, making interactions smooth and reassuring.
+
+## Testing
+
+Manual testing was performed throughout the development of Money Map. All core features—including signup, login, logout, adding, editing, and deleting expenses and budgets—were thoroughly tested by hand. Scrollbars and all interactive elements were checked to ensure proper functionality and usability. Every test passed successfully, confirming that the application works as intended across all supported actions and user flows.
