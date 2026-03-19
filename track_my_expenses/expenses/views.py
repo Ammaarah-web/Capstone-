@@ -159,7 +159,7 @@ def monthly_report(request):
 # Dashboard view: list user's expenses and monthly totals
 
 def dashboard(request):
-	expenses = Expense.objects.filter(user=request.user).order_by('date')
+	expenses = Expense.objects.filter(user=request.user).order_by('-id')
 	# Calculate totals per month
 	monthly = (
 		expenses
