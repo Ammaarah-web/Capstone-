@@ -86,10 +86,18 @@ def budgets(request):
 def category_report(request):
 	from datetime import date
 	selected_month = request.GET.get('month')
-	current_year = date.today().year
-	expenses = Expense.objects.filter(user=request.user).order_by('-date')
+	selected_year = request.GET.get('year')
+	all_years = Expense.objects.filter(user=request.user).dates('date', 'year')
+	available_years = sorted(set([y.year for y in all_years]), reverse=True)
+	if selected_year and selected_year.isdigit():
+		year = int(selected_year)
+	elif available_years:
+		year = available_years[0]
+	else:
+		year = date.today().year
+	expenses = Expense.objects.filter(user=request.user, date__year=year).order_by('-date')
 	if selected_month:
-		expenses = expenses.filter(date__month=int(selected_month), date__year=current_year)
+		expenses = expenses.filter(date__month=int(selected_month))
 	category_totals = defaultdict(float)
 	total_spending = 0.0
 	for expense in expenses:
@@ -121,6 +129,9 @@ def category_report(request):
 		'num_categories': num_categories,
 		'category_labels': category_labels,
 		'category_totals': category_totals,
+		'available_years': available_years,
+		'selected_year': year,
+		'selected_month': selected_month,
 	})
 
 
