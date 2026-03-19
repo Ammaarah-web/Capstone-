@@ -1,3 +1,20 @@
+/* Responsive table for mobile screens */
+.table-responsive-mobile {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 600px) {
+    .table-responsive-mobile table {
+        font-size: 0.95rem;
+        min-width: 600px;
+    }
+    .table-responsive-mobile th,
+    .table-responsive-mobile td {
+        padding: 0.4rem 0.3rem;
+    }
+}
 .dashboard-white .btn,
 .dashboard-white .main-btn,
 .dashboard-white .nav-btn {

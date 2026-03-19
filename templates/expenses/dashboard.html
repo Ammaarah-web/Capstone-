@@ -105,35 +105,37 @@
     <div class="row">
         <div class="col-md-12">
             <h5>Recent Expenses</h5>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Category</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for expense in expenses %}
-                    <tr>
-                        <td>{{ expense.date }}</td>
-                        <td>{{ expense.category.name }}</td>
-                        <td>{{ expense.notes }}</td>
-                        <td>£{{ expense.amount }}</td>
-                        <td>
-                            <a href="{% url 'edit_expense' expense.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
-                            <a href="{% url 'delete_expense' expense.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
-                        </td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="5">No expenses found.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <div class="table-responsive-mobile">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for expense in expenses %}
+                        <tr>
+                            <td>{{ expense.date }}</td>
+                            <td>{{ expense.category.name }}</td>
+                            <td>{{ expense.notes }}</td>
+                            <td>£{{ expense.amount }}</td>
+                            <td>
+                                <a href="{% url 'edit_expense' expense.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                <a href="{% url 'delete_expense' expense.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5">No expenses found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
