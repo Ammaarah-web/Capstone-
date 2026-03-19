@@ -1,6 +1,20 @@
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.db.models import Sum
+from django.db.models.functions import TruncMonth
+from .models import Budget, Expense
+from .forms import ExpenseForm, BudgetForm
+from collections import defaultdict
+from datetime import date, datetime
+
+
 # Homepage view
 def homepage(request):
 	return render(request, 'index.html')
+
+
 # Edit budget view
 def edit_budget(request, budget_id):
 	budget = get_object_or_404(Budget, id=budget_id, user=request.user)
@@ -8,30 +22,23 @@ def edit_budget(request, budget_id):
 		form = BudgetForm(request.POST, instance=budget)
 		if form.is_valid():
 			form.save()
+			messages.success(request, "Budget updated successfully.")
 			return redirect('budgets')
 	else:
 		form = BudgetForm(instance=budget)
 	return render(request, 'add_budget.html', {'form': form, 'edit_mode': True})
+
 
 # Delete budget view
 def delete_budget(request, budget_id):
 	budget = get_object_or_404(Budget, id=budget_id, user=request.user)
 	if request.method == 'POST':
 		budget.delete()
+		messages.success(request, "Budget deleted successfully.")
 		return redirect('budgets')
 	return render(request, 'delete_expense.html', {'object': budget, 'type': 'budget'})
-# User registration view
-# Budgets view
 
 
-# All imports at the top
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import TemplateView
-from django.contrib.auth.decorators import login_required
-from django.db.models import Sum
-from django.db.models.functions import TruncMonth
-from .models import Budget, Expense
-from .forms import ExpenseForm, BudgetForm
 # Add budget view
 def add_budget(request):
 	if request.method == 'POST':
@@ -40,18 +47,14 @@ def add_budget(request):
 			budget = form.save(commit=False)
 			budget.user = request.user
 			budget.save()
+			messages.success(request, "Budget added successfully.")
 			return redirect('budgets')
 	else:
 		form = BudgetForm()
 	return render(request, 'add_budget.html', {'form': form})
-from collections import defaultdict
-from datetime import date, datetime
 
 
 # Budgets view
-
-from django.contrib.auth.decorators import login_required
-
 @login_required
 def budgets(request):
 	user_budgets = Budget.objects.filter(user=request.user)
@@ -80,7 +83,6 @@ def budgets(request):
 
 
 # Category report view for spending by category
-
 def category_report(request):
 	from datetime import date
 	selected_month = request.GET.get('month')
@@ -102,7 +104,6 @@ def category_report(request):
 		percent = round((total / total_spending) * 100, 2) if total_spending > 0 else 0
 		category_data.append({'category': cat, 'total': total, 'percent': percent})
 
-	# Summary statistics
 	highest_category = None
 	highest_total = 0.0
 	if category_totals:
@@ -124,9 +125,6 @@ def category_report(request):
 
 
 # Monthly report view for spending per month
-
-from django.contrib.auth.decorators import login_required
-
 @login_required
 def monthly_report(request):
 	year = request.GET.get('year', '2026')
@@ -144,7 +142,6 @@ def monthly_report(request):
 		{'label': label, 'total': total}
 		for label, total in zip(monthly_labels, monthly_data)
 	]
-	# Get all years with expenses for dropdown
 	all_years = Expense.objects.filter(user=request.user).dates('date', 'year')
 	available_years = sorted(set([y.year for y in all_years]), reverse=True)
 	return render(request, 'monthly_report.html', {
@@ -157,10 +154,8 @@ def monthly_report(request):
 
 
 # Dashboard view: list user's expenses and monthly totals
-
 def dashboard(request):
 	expenses = Expense.objects.filter(user=request.user).order_by('-id')
-	# Calculate totals per month
 	monthly = (
 		expenses
 		.annotate(month=TruncMonth('date'))
@@ -173,14 +168,12 @@ def dashboard(request):
 
 	from decimal import Decimal
 	user_budgets = Budget.objects.filter(user=request.user)
-	# Calculate total budget and total spent
 	total_budget = user_budgets.aggregate(total=Sum('monthly_limit'))['total'] or Decimal('0.00')
 	total_spent = expenses.aggregate(total=Sum('amount'))['total'] or Decimal('0.00')
 	remaining_budget = total_budget - total_spent
 	spent_percent = float((total_spent / total_budget) * 100) if total_budget > 0 else 0
 	remaining_percent = float((remaining_budget / total_budget) * 100) if total_budget > 0 else 0
 
-	# Line chart dataset: daily spending totals
 	from django.db.models.functions import TruncDate
 	daily = (
 		expenses
@@ -206,10 +199,7 @@ def dashboard(request):
 	})
 
 
-
-
 # Add expense view
-
 def add_expense(request):
 	if request.method == 'POST':
 		form = ExpenseForm(request.POST)
@@ -217,12 +207,12 @@ def add_expense(request):
 			expense = form.save(commit=False)
 			expense.user = request.user
 			expense.save()
+			messages.success(request, "Expense added successfully.")
 			if 'save_add' in request.POST:
 				return redirect('add_expense')
 			else:
 				return redirect('dashboard')
 		else:
-			# Show form with errors
 			return render(request, 'add_expense.html', {'form': form})
 	else:
 		form = ExpenseForm()
@@ -230,13 +220,13 @@ def add_expense(request):
 
 
 # Edit expense view
-
 def edit_expense(request, expense_id):
 	expense = get_object_or_404(Expense, id=expense_id, user=request.user)
 	if request.method == 'POST':
 		form = ExpenseForm(request.POST, instance=expense)
 		if form.is_valid():
 			form.save()
+			messages.success(request, "Expense updated successfully.")
 			return redirect('dashboard')
 	else:
 		form = ExpenseForm(instance=expense)
@@ -244,10 +234,10 @@ def edit_expense(request, expense_id):
 
 
 # Delete expense view
-
 def delete_expense(request, expense_id):
 	expense = get_object_or_404(Expense, id=expense_id, user=request.user)
 	if request.method == 'POST':
 		expense.delete()
+		messages.success(request, "Expense deleted successfully.")
 		return redirect('dashboard')
 	return render(request, 'delete_expense.html', {'expense': expense})

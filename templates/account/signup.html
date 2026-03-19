@@ -1,11 +1,7 @@
 {% extends "base.html" %}
-{% load static %}
 {% load i18n %}
 
 {% block content %}
-<div class="homepage-bg"></div>
-<div class="background-overlay"></div>
-
 <div class="auth-wrapper">
     <div class="auth-card">
         <h1 class="auth-title">Sign Up</h1>
@@ -33,15 +29,14 @@
                 </div>
             {% endfor %}
 
-            {% if redirect_field_value %}
-                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
-            {% endif %}
-
             <button type="submit" class="main-btn auth-btn">Sign Up</button>
         </form>
 
         <div class="auth-links">
-            <p>Already have an account? <a href="{% url 'account_login' %}">Sign in</a></p>
+            <p>
+                Already have an account?
+                <a href="{% url 'account_login' %}">Sign in</a>
+            </p>
         </div>
     </div>
 </div>
