@@ -63,7 +63,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 100;
+    z-index: 999;
 }
 
 .navbar a,
@@ -490,7 +490,7 @@ h1 {
     position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 99999;
+    z-index: 101;
 }
 
 .custom-toast {
