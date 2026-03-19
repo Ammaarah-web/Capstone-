@@ -1,1 +1,66 @@
-# Capstone-
+## Introduction
+
+Welcome to Track My Expenses, a comprehensive web application designed to help users efficiently manage their personal finances. This platform enables users to track their income, expenses, and budgets, providing insightful reports and visualizations to support better financial decision-making. Built with Django, Track My Expenses offers a user-friendly interface and robust functionality for both casual users and those seeking advanced budgeting tools.
+
+Track My Expenses features a fully responsive design, ensuring seamless usability across desktops, tablets, and smartphones. The site is fantasy map themed, allowing you to “map” your expenses and budgets in a visually engaging way. More details on the theme will be added soon.
+
+## Features
+
+- **User Authentication**: Secure signup, login, and logout functionality to protect user data and personalize the experience.
+- **Dashboard**: An overview of your financial status, including recent expenses, budget summaries, and quick access to key actions.
+- **Expense Tracking**: Add, edit, and delete expenses with support for categories, dates, and descriptions. Easily manage your spending history.
+- **Budget Management**: Create and manage budgets for different categories. Set monthly limits and monitor your progress.
+- **Category Reports**: Generate detailed reports by category to analyze spending patterns and identify areas for improvement.
+- **Monthly Reports**: View monthly summaries of your income and expenses, including visual charts for easy interpretation.
+- **Account Management**: Update your account information and manage your profile securely.
+- **Responsive Design**: The site is optimized for both desktop and mobile devices, ensuring accessibility anywhere.
+- **Fantasy Map Theme**: Visualize your financial journey as a map, making expense tracking more engaging and intuitive. (More to come!)
+- **Data Backup**: Safeguard your financial data with backup options.
+- **Admin Panel**: For site administrators, manage users, categories, and expenses from a dedicated admin interface.
+
+Track My Expenses is designed to make financial tracking simple, insightful, and secure. Whether you want to monitor daily spending or plan for long-term goals, this site provides all the tools you need.
+
+## Project Diagram
+
+<img src="images/Diagram.png" width="300" alt="Project Diagram" />
+
+The project diagram provides a high-level overview of the application's architecture and main components. It illustrates how different modules interact to deliver a seamless expense tracking experience.
+
+
+## Wireframes
+
+
+### Wireframes
+<div style="display: flex; gap: 20px; align-items: flex-start;">
+	<div>
+		<img src="images/Laptop-wireframe.png" width="400" alt="Laptop Wireframe" />
+		<p style="text-align:center; font-size:14px;">Laptop Wireframe</p>
+	</div>
+	<div>
+		<img src="images/Mobile-wireframe.png" width="400" alt="Mobile Wireframe" />
+		<p style="text-align:center; font-size:14px;">Mobile Wireframe</p>
+	</div>
+</div>
+
+The wireframes Above demonstrate the layout and user interface for both desktop and mobile users, highlighting the main navigation, dashboard features, and responsive design.
+
+
+## AI Assistance
+
+AI (GitHub Copilot) was used extensively throughout the development of Track My Expenses for both code generation and debugging. Copilot provided intelligent code suggestions, helped automate repetitive tasks, and assisted in troubleshooting errors. Every AI-generated code snippet was manually reviewed for accuracy, security, and suitability. When the suggestions met the project’s requirements, they were implemented and saved; otherwise, they were refined or replaced. This collaborative workflow between AI and manual review ensured high-quality, reliable code while accelerating development.
+
+Copilot also contributed to documentation, UI design, and feature planning, making the development process more efficient and creative. All final code and features were carefully checked and tested before deployment.
+
+## Deployment
+
+
+## CRUD Functionality
+
+Track My Expenses implements full CRUD (Create, Read, Update, Delete) functionality across its core features:
+
+- **Create**: Users can add new expenses and budgets. The platform provides intuitive forms for entering details such as amount, date, description, and category. Categories are predefined and can be selected, but not created by users.
+- **Read**: All financial data can be viewed in dashboards, reports, and lists. Users can browse their expenses and budgets, and generate detailed reports for analysis. Categories are available for selection and reporting.
+- **Update**: Existing expenses and budgets can be edited. Users can modify details to correct mistakes or adjust their financial plans as needed. Category management (add/edit/delete) is restricted to administrators via the admin panel.
+- **Delete**: Users can remove expenses and budgets that are no longer relevant. Deletion is straightforward and helps keep records organized. Categories cannot be deleted by users; this is managed by administrators.
+
+This CRUD functionality ensures users have complete control over their financial data, while category management remains secure and centralized through the admin interface.
