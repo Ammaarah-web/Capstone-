@@ -1,30 +1,59 @@
-    /* Homepage background image styling */
-    .homepage-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: url('../images/Money-map.png') no-repeat center center/cover;
-        z-index: 0;
-    }
+.dashboard-white .btn,
+.dashboard-white .main-btn,
+.dashboard-white .nav-btn {
+    color: #d4af37 !important;
+}
+.dashboard-white .btn,
+.dashboard-white .main-btn,
+.dashboard-white .nav-btn {
+    color: #d4af37 !important;
+}
+.dashboard-white, .dashboard-white * {
+    color: #000 !important;
+}
+/* =========================
+   GLOBAL / BODY
+========================= */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'IM Fell English', Georgia, serif;
+    color: #000;
+    background: #fff;
+    padding-top: 80px;
+    position: relative;
+}
 
-    .background-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0,0,0,0.4);
-        z-index: 1;
-    }
-    margin-top: 100px !important; /* Ensures all page content starts below navbar */
-/* Fantasy-themed Navbar Styling */
+/* =========================
+   HOMEPAGE BACKGROUND ONLY
+========================= */
+.homepage-page {
+    background: url('../images/Money-map.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.homepage-page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+/* Make Bootstrap burger icon gold */
+.navbar .navbar-toggler-icon {
+    filter: brightness(0) saturate(100%) invert(76%) sepia(38%) saturate(420%) hue-rotate(18deg) brightness(1.05);
+}
 .navbar {
     width: 100vw;
-    background: rgba(90, 15, 29, 0.85);
+    background: #5a0f1d;
     color: #d4af37;
-    font-family: Georgia, serif;
+    font-family: 'IM Fell English', Georgia, serif;
     font-weight: bold;
     letter-spacing: 1px;
     display: flex;
@@ -37,9 +66,11 @@
     z-index: 100;
 }
 
-.navbar a, .navbar .nav-link, .navbar .navbar-brand {
+.navbar a,
+.navbar .nav-link,
+.navbar .navbar-brand {
     color: #d4af37 !important;
-    font-family: Georgia, serif;
+    font-family: 'IM Fell English', Georgia, serif;
     font-weight: bold;
     letter-spacing: 1px;
     margin: 0 0.5rem;
@@ -48,21 +79,42 @@
     position: relative;
 }
 
-.navbar a:hover, .navbar .nav-link:hover, .navbar .navbar-brand:hover {
+.navbar a:hover,
+.navbar .nav-link:hover,
+.navbar .navbar-brand:hover {
     color: #fff !important;
-    background: rgba(212,175,55,0.1);
-    box-shadow: 0 0 10px rgba(212,175,55,0.6);
+    background: rgba(212, 175, 55, 0.1);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
 }
 
-/* Fantasy-themed Button Styling */
-button, .btn, input[type="submit"], input[type="button"], .nav-btn {
+.site-title {
+    font-size: 2rem;
+    color: #d4af37;
+    font-family: 'IM Fell English', Georgia, serif;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 8px #5a0f1d;
+}
+
+.navbar-right {
+    display: flex;
+    gap: 1rem;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+button,
+.btn,
+input[type="submit"],
+input[type="button"],
+.nav-btn {
     background: rgba(90, 15, 29, 0.9);
     border: 2px solid #d4af37;
     color: #d4af37;
     border-radius: 8px;
     padding: 10px 20px;
     cursor: pointer;
-    font-family: Georgia, serif;
+    font-family: 'IM Fell English', Georgia, serif;
     font-size: 16px;
     letter-spacing: 1px;
     transition: all 0.3s ease;
@@ -70,172 +122,304 @@ button, .btn, input[type="submit"], input[type="button"], .nav-btn {
     z-index: 101;
 }
 
-button:hover, .btn:hover, input[type="submit"]:hover, input[type="button"]:hover, .nav-btn:hover {
+button:hover,
+.btn:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.nav-btn:hover {
     background: #7c1f2d;
     color: #fff;
-    box-shadow: 0 0 10px rgba(212,175,55,0.6);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
 }
-/* ...existing code... */
+
+    color: #d4af37;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-family: 'IM Fell English', Georgia, serif;
+    text-decoration: none;
+    transition: box-shadow 0.2s, background 0.2s, color 0.2s;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+}
+
+.nav-btn:hover {
+    background: rgba(212, 175, 55, 0.1);
+    color: #fff;
+    box-shadow: 0 0 16px #d4af37;
+}
+
+/* =========================
+   HOMEPAGE CONTENT
+========================= */
+.center-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+}
+
+.welcome-section {
+    background: rgba(90, 15, 29, 0.85);
+    border-radius: 24px;
+    padding: 3rem 2rem;
+    box-shadow: 0 0 32px rgba(90, 15, 29, 0.3);
+    text-align: center;
+    max-width: 480px;
+    width: 90vw;
+    margin-top: 80px;
+}
+
+.welcome-heading {
+    font-size: 2.5rem;
+    color: #d4af37;
+    font-family: 'IM Fell English', Georgia, serif;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 12px #5a0f1d;
+}
+
+.welcome-desc {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 2rem;
+    text-shadow: 0 1px 6px #5a0f1d;
+}
+
+.center-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.page-links {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: #d4af37;
+}
+
+.page-links a {
+    color: #d4af37;
+    text-decoration: underline;
+    margin: 0 0.3rem;
+    font-family: 'IM Fell English', Georgia, serif;
+}
+
+/* =========================
+   CARDS / DASHBOARD / AUTH
+========================= */
+
+.card {
+    transition: transform 0.2s ease;
+    background: rgba(90, 15, 29, 0.88);
+    border: 2px solid #d4af37;
+    border-radius: 18px;
+    color: #fff;
+    box-shadow: 0 0 24px rgba(90, 15, 29, 0.35);
+}
+
+.dashboard-white {
+    background: #fff !important;
+    color: #000 !important;
+    border: none !important;
+}
+
+.card h1,
+.card h2,
+.card h3,
+.card h4,
+.card h5,
+.card h6,
+.card label,
+.card p {
+    color: #fff;
+}
+
+/* =========================
+   FORMS
+========================= */
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    font-family: 'IM Fell English', Georgia, serif;
+    box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #d4af37;
+    box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.2);
+}
+
+.form-label {
+    color: #fff;
+    font-weight: bold;
+}
+
+.text-danger {
+    color: #ffb3b3 !important;
+}
+
+/* =========================
+   MODAL
+========================= */
+.modal {
+    z-index: 9999 !important;
+}
+
+.modal-content {
+    background: rgba(90, 15, 29, 0.97);
+    color: #fff;
+    border: 2px solid #d4af37;
+}
+
+.modal-title {
+    color: #d4af37;
+}
+
+/* =========================
+   GENERAL TEXT
+========================= */
 h1 {
     color: red;
 }
 
-.card {
-    transition: transform 0.2s ease;
+.text-muted {
+    color: #d4af37 !important;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    font-family: 'IM Fell English', Georgia, serif;
-    color: #000;
-    background: #fff;
-    padding-top: 80px; /* Push content further below navbar */
+/* =========================
+   AUTH PAGES
+========================= */
+.auth-wrapper {
     position: relative;
-    padding-top: 64px; /* Ensures headings and content are visible below navbar */
-}
-
-/* Overlay to darken background for readability */
-.background-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.3);
-    z-index: 0;
-}
-
-/* Navigation Bar */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem 2rem;
-    background: rgba(90, 15, 29, 0.95); /* Maroon with more opacity for visibility */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    z-index: 2;
-}
-
-.site-title {
-    font-size: 2rem;
-    color: #d4af37;
-    font-family: 'IM Fell English', Georgia, serif;
-    letter-spacing: 2px;
-    text-shadow: 0 2px 8px #5a0f1d;
-}
-
-.navbar-right {
-    display: flex;
-    gap: 1rem;
-}
-
-.nav-btn {
-    padding: 0.5rem 1.2rem;
-    border: 2px solid #d4af37;
-    background: transparent;
-    color: #d4af37;
-    border-radius: 20px;
-    font-size: 1rem;
-    font-family: 'IM Fell English', Georgia, serif;
-    text-decoration: none;
-    transition: box-shadow 0.2s, background 0.2s, color 0.2s;
-    box-shadow: 0 0 8px rgba(212,175,55,0.2);
-}
-
-.nav-btn:hover {
-    background: rgba(212,175,55,0.1);
-    color: #fff;
-    box-shadow: 0 0 16px #d4af37;
-}
-
-/* Center Content */
-.center-content {
+    z-index: 5;
+    min-height: calc(100vh - 140px);
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+.auth-card {
     position: relative;
-    z-index: 1;
-}
-
-.welcome-section {
-    background: rgba(90, 15, 29, 0.85);
+    z-index: 6;
+    width: 100%;
+    max-width: 560px;
+    background: rgba(90, 15, 29, 0.92);
+    border: 2px solid #d4af37;
     border-radius: 24px;
-    padding: 3rem 2rem;
-    box-shadow: 0 0 32px rgba(90,15,29,0.3);
-    text-align: center;
-    max-width: 480px;
-    width: 90vw;
-    margin-top: 80px; /* Space below navbar */
+    box-shadow: 0 0 32px rgba(90, 15, 29, 0.45);
+    padding: 2.5rem 2rem;
+    color: #fff;
 }
 
-.welcome-heading {
-    font-size: 2.5rem;
+.auth-title {
     color: #d4af37;
-    font-family: 'IM Fell English', Georgia, serif;
-    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 0.75rem;
     text-shadow: 0 2px 12px #5a0f1d;
 }
 
-.welcome-desc {
-    font-size: 1.2rem;
-    color: #fff;
+.auth-subtitle {
+    text-align: center;
+    color: #f5e7b2;
     margin-bottom: 2rem;
-    text-shadow: 0 1px 6px #5a0f1d;
+    font-size: 1.1rem;
 }
 
-.center-buttons {
+.auth-form {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
-    margin-bottom: 2rem;
+    gap: 1rem;
 }
 
-.main-btn {
-    padding: 1rem 2rem;
-    border: 2px solid #d4af37;
-    background: #5a0f1d;
-    color: #fff;
-    border-radius: 24px;
-    font-size: 1.2rem;
-    font-family: 'IM Fell English', Georgia, serif;
-    text-decoration: none;
-    transition: box-shadow 0.2s, background 0.2s, color 0.2s;
-    box-shadow: 0 0 12px rgba(212,175,55,0.2);
+.auth-group label {
+    display: block;
+    color: #f5e7b2;
+    margin-bottom: 0.4rem;
+    font-weight: bold;
 }
 
-.main-btn:hover {
-    background: #7c1f2d;
-    color: #d4af37;
-    box-shadow: 0 0 24px #d4af37;
+.auth-group input {
+    background: rgba(255, 255, 255, 0.96);
+    color: #222;
+    border: 1px solid #d4af37;
+    border-radius: 10px;
+    padding: 0.8rem 0.9rem;
 }
 
-.page-links {
+.auth-group input:focus {
+    border-color: #d4af37;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.35);
+}
+
+.auth-btn {
+    width: 100%;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.auth-links {
+    text-align: center;
     margin-top: 1.5rem;
-    font-size: 1rem;
-    color: #d4af37;
 }
 
-.page-links a {
+.auth-links p {
+    margin-bottom: 0.6rem;
+    color: #fff;
+}
+
+.auth-links a {
     color: #d4af37;
+    font-weight: bold;
     text-decoration: underline;
-    margin: 0 0.3rem;
-    font-family: 'IM Fell English', Georgia, serif;
 }
 
-/* Responsive Styles */
+.auth-links a:hover {
+    color: #fff;
+}
+
+.auth-error,
+.auth-field-error {
+    color: #ffd1d1;
+    font-size: 0.95rem;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
 @media (max-width: 900px) {
     .welcome-section {
         padding: 2rem 1rem;
         max-width: 90vw;
     }
+
     .welcome-heading {
         font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 90px;
+    }
+
+    .navbar {
+        padding: 0.8rem 1rem;
+    }
+
+    .card {
+        margin: 0 0.5rem;
     }
 }
 
@@ -243,192 +427,49 @@ body {
     .navbar {
         padding: 0.8rem 1rem;
     }
+
     .site-title {
         font-size: 1.3rem;
     }
+
     .welcome-section {
         padding: 1rem 0.5rem;
         max-width: 98vw;
     }
+
     .welcome-heading {
         font-size: 1.2rem;
     }
+
     .main-btn {
         font-size: 1rem;
         padding: 0.7rem 1.2rem;
     }
-}
-height: 100vh;
-    font-family: 'IM Fell English', Georgia, serif;
-    color: #fff;
-    background: url('/static/images/Money-map.png') no-repeat center center fixed;
-    /* If using Django static, update to: url('{% static "images/expense-map-background.png" %}') */
-    /* If the actual image is named differently, update the path accordingly. */
-    /* The image you attached should be placed at /images/expense-map-background.png */
-    background-size: cover;
-    position: relative;
+
+    .welcome-desc {
+        font-size: 1rem;
+    }
+
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .auth-card {
+        padding: 1.5rem 1rem;
+        border-radius: 18px;
+    }
+
+    .auth-title {
+        font-size: 1.8rem;
+    }
+
+    .auth-subtitle {
+        font-size: 1rem;
+    }
 }
 
-/* Overlay to darken background for readability */
+.homepage-bg,
 .background-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.3);
-    z-index: 0;
-}
-
-/* Navigation Bar */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem 2rem;
-    background: rgba(90, 15, 29, 0.95); /* Maroon with more opacity for visibility */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    z-index: 2;
-}
-
-.site-title {
-    font-size: 2rem;
-    color: #d4af37;
-    font-family: 'IM Fell English', Georgia, serif;
-    letter-spacing: 2px;
-    text-shadow: 0 2px 8px #5a0f1d;
-}
-
-.navbar-right {
-    display: flex;
-    gap: 1rem;
-}
-
-.nav-btn {
-    padding: 0.5rem 1.2rem;
-    border: 2px solid #d4af37;
-    background: transparent;
-    color: #d4af37;
-    border-radius: 20px;
-    font-size: 1rem;
-    font-family: 'IM Fell English', Georgia, serif;
-    text-decoration: none;
-    transition: box-shadow 0.2s, background 0.2s, color 0.2s;
-    box-shadow: 0 0 8px rgba(212,175,55,0.2);
-}
-
-.nav-btn:hover {
-    background: rgba(212,175,55,0.1);
-    color: #fff;
-    box-shadow: 0 0 16px #d4af37;
-}
-
-/* Center Content */
-.center-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    position: relative;
-    z-index: 1;
-}
-
-.welcome-section {
-    background: rgba(90, 15, 29, 0.85);
-    border-radius: 24px;
-    padding: 3rem 2rem;
-    box-shadow: 0 0 32px rgba(90,15,29,0.3);
-    text-align: center;
-    max-width: 480px;
-    width: 90vw;
-    margin-top: 80px; /* Space below navbar */
-}
-
-.welcome-heading {
-    font-size: 2.5rem;
-    color: #d4af37;
-    font-family: 'IM Fell English', Georgia, serif;
-    margin-bottom: 1rem;
-    text-shadow: 0 2px 12px #5a0f1d;
-}
-
-.welcome-desc {
-    font-size: 1.2rem;
-    color: #fff;
-    margin-bottom: 2rem;
-    text-shadow: 0 1px 6px #5a0f1d;
-}
-
-.center-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    margin-bottom: 2rem;
-}
-
-.main-btn {
-    padding: 1rem 2rem;
-    border: 2px solid #d4af37;
-    background: #5a0f1d;
-    color: #fff;
-    border-radius: 24px;
-    font-size: 1.2rem;
-    font-family: 'IM Fell English', Georgia, serif;
-    text-decoration: none;
-    transition: box-shadow 0.2s, background 0.2s, color 0.2s;
-    box-shadow: 0 0 12px rgba(212,175,55,0.2);
-}
-
-.main-btn:hover {
-    background: #7c1f2d;
-    color: #d4af37;
-    box-shadow: 0 0 24px #d4af37;
-}
-
-.page-links {
-    margin-top: 1.5rem;
-    font-size: 1rem;
-    color: #d4af37;
-}
-
-.page-links a {
-    color: #d4af37;
-    text-decoration: underline;
-    margin: 0 0.3rem;
-    font-family: 'IM Fell English', Georgia, serif;
-}
-
-/* Responsive Styles */
-@media (max-width: 900px) {
-    .welcome-section {
-        padding: 2rem 1rem;
-        max-width: 90vw;
-    }
-    .welcome-heading {
-        font-size: 2rem;
-    }
-}
-
-@media (max-width: 600px) {
-    .navbar {
-        padding: 0.8rem 1rem;
-    }
-    .site-title {
-        font-size: 1.3rem;
-    }
-    .welcome-section {
-        padding: 1rem 0.5rem;
-        max-width: 98vw;
-    }
-    .welcome-heading {
-        font-size: 1.2rem;
-    }
-    .main-btn {
-        font-size: 1rem;
-        padding: 0.7rem 1.2rem;
-    }
-}
+    display: none !important;
 }
