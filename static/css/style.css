@@ -87,12 +87,13 @@ body {
     box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
 }
 
-.site-title {
+
+.page-title {
     font-size: 2rem;
-    color: #d4af37;
+    color: #000;
     font-family: 'IM Fell English', Georgia, serif;
     letter-spacing: 2px;
-    text-shadow: 0 2px 8px #5a0f1d;
+    margin-bottom: 0.5rem;
 }
 
 .navbar-right {
@@ -221,7 +222,17 @@ input[type="button"]:hover,
 .dashboard-white {
     background: #fff !important;
     color: #000 !important;
-    border: none !important;
+    border: 2px solid #ccc !important;
+    transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-radius: 16px;
+}
+
+.dashboard-white:hover {
+    box-shadow: 0 0 32px 8px #50b4ff, 0 4px 24px rgba(80, 180, 255, 0.35), 0 2px 8px rgba(0,0,0,0.18);
+    border: 2px solid #50b4ff;
+    transform: scale(1.04);
+}
 }
 
 .card h1,

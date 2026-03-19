@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container mt-4" style="margin-top: 100px;">
-    <h2 style="margin-top: 40px;">Spending By Category Report</h2>
+    <h2 class="page-title mb-2" style="margin-top: 0px; color: #000;">Spending By Category Report</h2>
     <div class="row mb-4">
         <div class="col-md-4">
             <form method="get">
@@ -27,21 +27,20 @@
     <div class="row mb-5 align-items-stretch">
         <div class="col-md-4 mb-4">
             <div class="card dashboard-white shadow-sm p-2 text-center h-100" style="min-height: 120px;">
-                <div class="text-muted" style="font-size: 0.95rem;">Total Spending</div>
-                <div class="fw-bold" style="font-size: 1.5rem;">£{{ total_spending|floatformat:2 }}</div>
+                <div class="fw-bold" style="font-size: 1.2rem; color: #111; padding-top: 18px;">Total Spending</div>
+                <div class="fw-bold" style="font-size: 2.2rem; color: #111; padding-bottom: 18px;">£{{ total_spending|floatformat:2 }}</div>
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="card dashboard-white shadow-sm p-2 text-center h-100" style="min-height: 120px;">
-                <div class="text-muted" style="font-size: 0.95rem;">Top Category</div>
-                <div class="fw-bold" style="font-size: 1.2rem;">{{ highest_category|default:'N/A' }}</div>
-                <div class="fs-6" style="font-size: 1rem;">£{{ highest_total|floatformat:2 }}</div>
+                <div class="fw-bold" style="font-size: 1.2rem; color: #111; padding-top: 18px;">Top Category</div>
+                <div class="fw-bold" style="font-size: 2.2rem; color: #111; padding-bottom: 18px;">{{ highest_category|default:'N/A' }}</div>
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="card dashboard-white shadow-sm p-2 text-center h-100" style="min-height: 120px;">
-                <div class="text-muted" style="font-size: 0.95rem;">Categories</div>
-                <div class="fw-bold" style="font-size: 1.5rem;">{{ num_categories }}</div>
+                <div class="fw-bold" style="font-size: 1.2rem; color: #111; padding-top: 18px;">Categories</div>
+                <div class="fw-bold" style="font-size: 2.2rem; color: #111; padding-bottom: 18px;">{{ num_categories }}</div>
             </div>
         </div>
     </div>
