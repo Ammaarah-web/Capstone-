@@ -26,8 +26,12 @@
             <h1 class="welcome-heading">Welcome to Your Money Map</h1>
             <p class="welcome-desc">Track your expenses across the magical lands of your finances.</p>
             <div class="center-buttons">
-                <a class="main-btn" href="{{ login_url }}">Enter your Map</a>
-                <a class="main-btn" href="{{ signup_url }}">Create Account</a>
+                <form action="{{ login_url }}" method="get" style="display:inline;">
+                    <button type="submit" class="main-btn nav-btn">Enter your Map</button>
+                </form>
+                <form action="{{ signup_url }}" method="get" style="display:inline;">
+                    <button type="submit" class="main-btn nav-btn">Create Account</button>
+                </form>
             </div>
             <div class="page-links">
                 <a href="{{ login_url }}">Login</a> |

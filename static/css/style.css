@@ -281,6 +281,14 @@ textarea:focus {
     border: 2px solid #d4af37;
 }
 
+/* Force logout modal to be white */
+#logoutConfirmModal .modal-content {
+    background: #fff !important;
+    color: #000 !important;
+    border: 2px solid #d4af37;
+}
+}
+
 .modal-title {
     color: #d4af37;
 }
