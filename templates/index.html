@@ -13,11 +13,11 @@
         <div class="navbar-left">
             <span class="site-title">Money Map</span>
         </div>
-        <div class="navbar-right">
+        <div class="navbar-right" style="justify-content: flex-start; margin-left: 16vw; min-width: 320px;">
             {% url 'account_login' as login_url %}
             {% url 'account_signup' as signup_url %}
-            <a class="nav-btn" href="{{ login_url }}">Login</a>
-            <a class="nav-btn" href="{{ signup_url }}">Register</a>
+            <a class="nav-btn" style="margin-left: 0.5rem;" href="{{ login_url }}">Login</a>
+            <a class="nav-btn" style="margin-left: 0.5rem;" href="{{ signup_url }}">Register</a>
         </div>
     </nav>
 

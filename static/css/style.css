@@ -45,9 +45,25 @@ body {
 /* =========================
    HOMEPAGE BACKGROUND ONLY
 ========================= */
+
 .homepage-page {
     background: url('../images/Money-map.png') no-repeat center center fixed;
     background-size: cover;
+    margin-top: 80px;
+    min-height: calc(100vh - 80px);
+    position: relative;
+}
+
+.homepage-page::before {
+    content: "";
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 0;
+    pointer-events: none;
 }
 
 .homepage-page::before {
