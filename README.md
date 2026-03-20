@@ -92,7 +92,34 @@ AI tools such as GitHub Copilot were used to assist in generating Django unit te
 
 All tests passed successfully, confirming that key features behave as expected.
 
-## Development Process
+## Validation
+
+HTML and CSS were validated using W3C validation tools.
+
+
+
+<div style="display: flex; gap: 32px; align-items: flex-start; margin-bottom: 16px; justify-content: center;">
+	<div>
+		<img src="images/css.validator.png" width="480" alt="CSS Validator Screenshot" />
+		<p style="text-align:center; font-size:14px;">CSS Validator Screenshot</p>
+	</div>
+	<div>
+		<img src="images/html.validator.png" width="480" alt="HTML Validator Screenshot" />
+		<p style="text-align:center; font-size:14px;">HTML Validator Screenshot</p>
+	</div>
+</div>
+
+## Agile Methodology
+
+An Agile approach was used throughout the development of this project. The application was developed in iterative stages, focusing on building core functionality first and then gradually adding additional features.
+
+User stories were used to guide development and ensure that all required features were implemented in a structured and user-focused way. These helped prioritise functionality such as expense tracking, editing, deleting, and reporting.
+
+### Iterative Development
+
+The application was continuously tested and improved throughout development. This iterative process allowed for early identification of issues and ensured that the final application met functional and usability requirements.
+
+
 
 ## Challenges
 
@@ -100,3 +127,6 @@ During development, an attempt was made to implement a custom authentication sys
 As a result, the decision was made to refactor the authentication system and integrate Django Allauth instead. This improved reliability, reduced development time, and ensured best practices were followed.
 This process was challenging but provided valuable insight into authentication workflows and the importance of using established frameworks.
 
+## Future Improvements
+
+- Add functionality for users to upload images of receipts when recording expenses. This would enhance usability by allowing users to keep visual records of their transactions and improve overall expense tracking.
