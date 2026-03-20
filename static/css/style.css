@@ -166,6 +166,7 @@ input[type="button"]:hover,
     box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
 }
 
+.button {
     color: #d4af37;
     border-radius: 20px;
     font-size: 1rem;
@@ -266,7 +267,6 @@ input[type="button"]:hover,
     border: 2px solid #50b4ff;
     transform: scale(1.04);
 }
-}
 
 .card h1,
 .card h2,
@@ -330,7 +330,6 @@ textarea:focus {
     background: #fff !important;
     color: #000 !important;
     border: 2px solid #d4af37;
-}
 }
 
 .modal-title {

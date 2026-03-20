@@ -1,4 +1,4 @@
-# Money Map: Track my expenses
+
 ## Introduction
 
 Welcome to Money Map, a comprehensive web application designed to help users efficiently manage their personal finances. This platform enables users to track their income, expenses, and budgets, providing insightful reports and visualizations to support better financial decision-making. Built with Django, Money Map offers a user-friendly interface and robust functionality for both casual users and those seeking advanced budgeting tools.
@@ -82,4 +82,21 @@ These notifications confirm successful operations and help users stay informed a
 
 ## Testing
 
-Manual testing was performed throughout the development of Money Map. All core features—including signup, login, logout, adding, editing, and deleting expenses and budgets—were thoroughly tested by hand. Scrollbars and all interactive elements were checked to ensure proper functionality and usability. Every test passed successfully, confirming that the application works as intended across all supported actions and user flows.
+Manual testing was performed throughout the development of Money Map. All core features—including signup, login, logout, adding, editing, and deleting expenses and budgets—were thoroughly tested by hand. Scrollbars and all interactive elements were checked to ensure proper functionality and usability. Every test passed successfully, confirming that the application works as intended across all supported actions and user flows. The manual test cases were derived from the project user stories and acceptance criteria. Each core feature was tested to confirm that it met the expected functional, usability, responsiveness, and data-handling requirements.
+All core test cases passed successfully. Minor issues were identified during testing and were resolved prior to final submission.
+
+AI tools such as GitHub Copilot were used to assist in generating Django unit tests. The generated tests were reviewed and adapted to align with the project’s functionality.
+
+![Testing Screenshot](images/Testing.png)
+*Testing Screenshot: Example of test results and UI validation*
+
+All tests passed successfully, confirming that key features behave as expected.
+
+## Development Process
+
+## Challenges
+
+During development, an attempt was made to implement a custom authentication system. However, this approach introduced complexity and potential security concerns. 
+As a result, the decision was made to refactor the authentication system and integrate Django Allauth instead. This improved reliability, reduced development time, and ensured best practices were followed.
+This process was challenging but provided valuable insight into authentication workflows and the importance of using established frameworks.
+
