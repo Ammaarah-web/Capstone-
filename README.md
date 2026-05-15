@@ -5,6 +5,10 @@ Welcome to Money Map, a comprehensive web application designed to help users eff
 
 Money Map features a fully responsive design, ensuring seamless usability across desktops, tablets, and smartphones. The site is fantasy map themed, allowing you to “map” your expenses and budgets in a visually engaging way. More details on the theme will be added soon.
 
+## Live Links: 
+
+https://money-map-422d80e8e44a.herokuapp.com/
+
 ## Features
 
 - **User Authentication**: Secure signup, login, and logout functionality to protect user data and personalize the experience.
@@ -137,9 +141,10 @@ Repeated deployment failures occurred due to outdated or conflicting cached depe
 Resolution:
 The build cache was cleared using heroku repo:purge_cache, and the application was redeployed. This ensured that all dependencies were freshly installed and aligned with the updated configuration.
 
+
 ### AI and Debugging Support in Deployment
 
-AI (GitHub Copilot) was used alongside Heroku logs to interpret error messages and suggest possible causes and fixes. This was particularly useful in translating technical deployment errors into actionable solutions, such as identifying missing packages, configuration mismatches, and environment inconsistencies.
+AI (GitHub Copilot) was used alongside Heroku logs to interpret error messages and suggest possible causes and fixes. This was particularly useful in translating technical deployment errors into actionable solutions, such as identifying missing packages, configuration mismatches, and environment inconsistencies. An example of this during deployment, static files were not initially rendering on the live application. This issue was caused by incomplete WhiteNoise configuration and incorrect middleware ordering. The issue was resolved by adding the appropriate static files storage backend and correctly positioning WhiteNoise in the middleware stack. After redeployment and running collectstatic, all static assets were served correctly.   
 
 Heroku logs provided the primary source of debugging information, while AI assisted in understanding the meaning of error outputs and recommending Django-specific fixes. This combination allowed for efficient resolution of deployment issues and reduced the time required to stabilise the production environment.
 
@@ -148,8 +153,6 @@ Heroku logs provided the primary source of debugging information, while AI assis
 Once all issues were resolved, the application successfully deployed to Heroku and functioned as expected in a live environment. Core features such as authentication, budgeting, and expense tracking operated correctly, confirming that the production configuration matched the development setup.
 
 This process highlighted the importance of environment configuration, dependency management, and log-based debugging when deploying Django applications.
-
-Whitenoise
 
 ## CRUD Functionality
 
