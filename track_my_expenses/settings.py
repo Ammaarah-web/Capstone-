@@ -109,6 +109,9 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
 
+# Redirect unauthenticated users to login page
+LOGIN_URL = '/accounts/login/'
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

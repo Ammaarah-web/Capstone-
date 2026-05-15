@@ -1,0 +1,3 @@
+## AI-Assisted Access Control Fix
+
+To resolve a critical access control issue in my Django application, I leveraged GitHub Copilot (GPT-4.1) for step-by-step debugging and remediation. Copilot guided me to verify and enforce the use of the `@login_required` decorator on all user-specific views, ensured proper import order, and checked Django settings and middleware for correct authentication handling. With Copilot's assistance, I was able to identify and fix the root cause of unauthorized access and application crashes, resulting in a secure and user-friendly authentication flow. This demonstrates the practical value of AI tools in improving code quality and security during development.
