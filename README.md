@@ -48,12 +48,108 @@ The wireframes Above demonstrate the layout and user interface for both desktop 
 
 ## AI Assistance
 
-AI (GitHub Copilot) was used extensively throughout the development of Money Map for both code generation and debugging. Copilot provided intelligent code suggestions, helped automate repetitive tasks, and assisted in troubleshooting errors. Every AI-generated code snippet was manually reviewed for accuracy, security, and suitability. When the suggestions met the project’s requirements, they were implemented and saved; otherwise, they were refined or replaced. This collaborative workflow between AI and manual review ensured high-quality, reliable code while accelerating development.
+AI (GitHub Copilot) was used throughout the development of Money Map to support debugging, optimisation, implementation decisions, and documentation. AI tools acted as a development assistant by helping identify potential issues, suggesting improvements to Django implementation, and accelerating problem-solving. However, all AI-generated suggestions were critically evaluated, tested, and adapted before being implemented to ensure correctness, security, and suitability for the application. Below are some more specific examples of how AI was used to debug and optimise code: 
 
-Copilot also contributed to documentation, UI design, and feature planning, making the development process more efficient and creative. All final code and features were carefully checked and tested before deployment.
+### AI-Assisted Code Optimisation and Performance Improvements:
+
+AI contributed to improving the efficiency of database queries and data processing logic, particularly in dashboard and reporting features. It recommended replacing manual Python-based aggregation with Django ORM functions such as:
+
+aggregate(Sum('amount'))
+annotate(month=TruncMonth('date'))
+
+These improvements reduced unnecessary iteration over querysets and improved performance when calculating totals, monthly breakdowns, and chart data. AI also suggested removing redundant imports and consolidating repeated query logic, which improved code readability and maintainability. These optimisations resulted in cleaner, more efficient, and more scalable database operations.
+
+### Resolving Logout and URL Issues with AI:
+
+During the development of this project, I encountered an issue where the logout button was not functioning as expected. To resolve this, I leveraged AI assistance, which guided me through a systematic debugging process. The AI helped me trace the problem by reviewing the relevant Django views, templates, and URL configurations. It identified inconsistencies in the URL patterns and template links, ensuring that the logout functionality was correctly mapped and accessible. Additionally, the AI assisted in verifying that all authentication-related URLs (login, logout, signup) were properly connected and operational. Through step-by-step troubleshooting, code suggestions, and validation of the changes, the AI enabled me to efficiently debug the issue, resulting in a fully functional logout button and seamless navigation across all authentication routes. This collaborative debugging process not only fixed the immediate problem but also improved the overall reliability of the user authentication flow in the application.
+
+### Debugging Authentication and Access Control Issues:
+
+During testing, a critical security issue was identified where unauthenticated users could access restricted views such as /dashboard/, /add_expense/, and related edit/delete endpoints by directly entering URLs. This bypassed the intended navigation flow and led to a server-side crash (HTTP 500 error). The error occurred because Django attempted to execute database queries using request.user, which returned an AnonymousUser object when no authentication was present. This resulted in invalid ORM filtering, as shown below:
+
+Expense.objects.filter(user=request.user)
+
+Since AnonymousUser cannot be used in database queries expecting a valid user instance, this caused a runtime exception and application failure. AI was used to diagnose this issue in detail. It identified that Django does not automatically protect views unless explicitly secured, meaning that URL-based access bypasses frontend restrictions entirely. It also explained that the root cause was inconsistent application of the @login_required decorator across key views. Specifically, AI highlighted that while some views (such as budget and reporting features) were protected, critical functional views including:
+
+dashboard
+add_expense
+edit_expense
+delete_expense
+
+were missing authentication enforcement, creating a security vulnerability. AI further clarified that this issue was not only a runtime error but also a security flaw, as it allowed unauthorised access attempts to reach sensitive application logic. To resolve the issue, AI guided the implementation of consistent server-side authentication using the @login_required decorator across all restricted views. This ensured that unauthenticated users are redirected to the login page before any database interaction occurs, preventing both application crashes and unauthorised data access. After implementing the fix, direct URL access to protected views correctly redirects users to the login page, and the application no longer attempts to process database queries for unauthenticated sessions.
+
+### AI-Assisted Authentication Migration (Django Allauth):
+
+AI was used to support a significant improvement to the application’s authentication system by migrating from a custom login implementation to Django Allauth. This change was made to improve security, reduce manual authentication handling, and align the project with established Django best practices. Initially, the project used a custom authentication flow, which required manual handling of login templates, URL routing, and session management. This approach increased complexity and introduced potential inconsistencies in authentication handling across the application. AI assisted in identifying that Django Allauth provides a more robust and standardised authentication framework, offering built-in support for login, logout, registration, password management, and session handling.
+
+During the migration process, AI provided step-by-step guidance on:
+
+Removing the existing custom login modal and associated authentication views
+Updating urls.py to include Allauth authentication routes
+Installing and configuring django-allauth in settings.py
+Adjusting installed apps to include required Allauth modules such as:
+allauth
+allauth.account
+allauth.socialaccount (where applicable)
+Configuring authentication backends to integrate Allauth with Django’s authentication system
+Updating templates to use Allauth’s standard login and signup views
+
+AI also helped ensure that the migration did not break existing application functionality, particularly around session handling and user-specific data access. It highlighted the importance of testing authentication flows after configuration changes to ensure continuity of user experience. After implementation, authentication became more stable, secure, and maintainable. Users were able to log in and log out using a standardised system, and the application benefited from reduced custom authentication code and improved scalability for future features.
+
+### Summary of AI Contribution
+
+Overall, AI played a supportive role in debugging, optimisation, and development decision-making. It helped identify the root causes of authentication errors, improve database query efficiency, and guide best-practice Django implementation.
+
+A key outcome of using AI was improved understanding of Django’s authentication system, particularly the importance of applying server-side access control rather than relying on frontend restrictions alone. All final implementation decisions were verified and tested manually to ensure correctness and reliability.
 
 ## Deployment
 
+The application was deployed using Heroku to provide a live production version of Money Map. The deployment process required adapting the project from a local development environment to a cloud-based production environment, including configuration of dependencies, environment variables, and Django production settings.
+
+During initial deployment, several issues were encountered that prevented the application from running correctly. These issues were diagnosed using Heroku logs, which provided detailed runtime error messages. GitHub Copilot (AI) was also used to help interpret these errors and suggest appropriate fixes based on Django and Heroku deployment best practices.
+
+### Deployment Issues and Resolutions
+1. Missing pkg_resources module (ModuleNotFoundError)
+
+The application initially failed to start due to a missing Python module: pkg_resources. This occurred because the setuptools package, which provides this module, was not correctly installed in the production environment.
+
+Resolution:
+The issue was resolved by adding setuptools and wheel to requirements.txt and ensuring they were correctly installed during deployment. This ensured compatibility between the production environment and project dependencies.
+
+2. Unsupported Python version on Heroku
+
+Heroku initially defaulted to Python 3.14, which was not fully compatible with some project dependencies, including Gunicorn and other supporting libraries.
+
+Resolution:
+A runtime.txt file was created to explicitly specify Python 3.12.8, aligning the deployment environment with the local development setup. This ensured consistent behaviour across environments and resolved compatibility issues.
+
+3. DisallowedHost error at runtime
+
+The application returned a DisallowedHost error when accessed via the Heroku URL, indicating that the domain was not correctly configured in Django settings.
+
+Resolution:
+The Heroku app domain (money-map-422d80e8e44a.herokuapp.com) was added to the ALLOWED_HOSTS setting in settings.py, allowing Django to accept requests from the deployed environment.
+
+4. Heroku build cache conflicts
+
+Repeated deployment failures occurred due to outdated or conflicting cached dependencies within the Heroku build system.
+
+Resolution:
+The build cache was cleared using heroku repo:purge_cache, and the application was redeployed. This ensured that all dependencies were freshly installed and aligned with the updated configuration.
+
+### AI and Debugging Support in Deployment
+
+AI (GitHub Copilot) was used alongside Heroku logs to interpret error messages and suggest possible causes and fixes. This was particularly useful in translating technical deployment errors into actionable solutions, such as identifying missing packages, configuration mismatches, and environment inconsistencies.
+
+Heroku logs provided the primary source of debugging information, while AI assisted in understanding the meaning of error outputs and recommending Django-specific fixes. This combination allowed for efficient resolution of deployment issues and reduced the time required to stabilise the production environment.
+
+### Summary of Deployment Process
+
+Once all issues were resolved, the application successfully deployed to Heroku and functioned as expected in a live environment. Core features such as authentication, budgeting, and expense tracking operated correctly, confirming that the production configuration matched the development setup.
+
+This process highlighted the importance of environment configuration, dependency management, and log-based debugging when deploying Django applications.
+
+Whitenoise
 
 ## CRUD Functionality
 
