@@ -40,11 +40,11 @@ The project diagram provides a high-level overview of the application's architec
 ### Wireframes
 <div style="display: flex; gap: 20px; align-items: flex-start;">
 	<div>
-		<img src="images/Laptop-wireframe.png" width="400" alt="Laptop Wireframe" />
+		<img src="images/Laptop-wireframe.png" width="500" alt="Laptop Wireframe" />
 		<p style="text-align:center; font-size:14px;">Laptop Wireframe</p>
 	</div>
 	<div>
-		<img src="images/Mobile-wireframe.png" width="400" alt="Mobile Wireframe" />
+		<img src="images/Mobile-wireframe.png" width="500" alt="Mobile Wireframe" />
 		<p style="text-align:center; font-size:14px;">Mobile Wireframe</p>
 	</div>
 </div>
@@ -277,9 +277,9 @@ HTML and CSS were validated using W3C validation tools.
 
 <div style="display: flex; gap: 32px; align-items: flex-start; margin-bottom: 16px; justify-content: center;">
 	<div>
-		<img src="images/css.validator.png" width="600" alt="CSS Validator Screenshot" />
+		<img src="images/css.validator.png" width="700" alt="CSS Validator Screenshot" />
 	<p style="text-align:center; font-size:14px;">CSS Validator Screenshot</p>
-	<img src="images/html.validator.png" width="600" alt="HTML Validator Screenshot" />
+	<img src="images/html.validator.png" width="700" alt="HTML Validator Screenshot" />
 	<p style="text-align:center; font-size:14px;">HTML Validator Screenshot</p>
 
 ## Agile Methodology
