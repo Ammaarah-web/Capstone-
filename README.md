@@ -9,7 +9,7 @@ Money Map features a fully responsive design, ensuring seamless usability across
 
 - https://money-map-422d80e8e44a.herokuapp.com/
 
-- git remote -vhttps://github.com/Ammaarah-web/Capstone- 
+- https://github.com/Ammaarah-web/Capstone- 
 
 ## Features
 
