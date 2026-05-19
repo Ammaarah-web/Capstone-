@@ -7,7 +7,9 @@ Money Map features a fully responsive design, ensuring seamless usability across
 
 ## Live Links: 
 
-https://money-map-422d80e8e44a.herokuapp.com/
+- https://money-map-422d80e8e44a.herokuapp.com/
+
+- git remote -vhttps://github.com/Ammaarah-web/Capstone- 
 
 ## Features
 
@@ -27,7 +29,7 @@ Money Map is designed to make financial tracking simple, insightful, and secure.
 
 ## Project Diagram
 
-<img src="images/Diagram.png" width="300" alt="Project Diagram" />
+<img src="images/Diagram.png" width="400" alt="Project Diagram" />
 
 The project diagram provides a high-level overview of the application's architecture and main components. It illustrates how different modules interact to deliver a seamless expense tracking experience.
 
@@ -88,15 +90,17 @@ AI was used to support a significant improvement to the application’s authenti
 
 During the migration process, AI provided step-by-step guidance on:
 
-Removing the existing custom login modal and associated authentication views
-Updating urls.py to include Allauth authentication routes
-Installing and configuring django-allauth in settings.py
+- Removing the existing custom login modal and associated authentication views
+- Updating urls.py to include Allauth authentication routes
+- Installing and configuring django-allauth in settings.py
+
 Adjusting installed apps to include required Allauth modules such as:
-allauth
-allauth.account
-allauth.socialaccount (where applicable)
-Configuring authentication backends to integrate Allauth with Django’s authentication system
-Updating templates to use Allauth’s standard login and signup views
+
+- allauth
+- allauth.account
+- allauth.socialaccount (where applicable)
+- Configuring authentication backends to integrate Allauth with Django’s authentication system
+- Updating templates to use Allauth’s standard login and signup views
 
 AI also helped ensure that the migration did not break existing application functionality, particularly around session handling and user-specific data access. It highlighted the importance of testing authentication flows after configuration changes to ensure continuity of user experience. After implementation, authentication became more stable, secure, and maintainable. Users were able to log in and log out using a standardised system, and the application benefited from reduced custom authentication code and improved scalability for future features.
 
@@ -112,29 +116,103 @@ The application was deployed using Heroku to provide a live production version o
 
 During initial deployment, several issues were encountered that prevented the application from running correctly. These issues were diagnosed using Heroku logs, which provided detailed runtime error messages. GitHub Copilot (AI) was also used to help interpret these errors and suggest appropriate fixes based on Django and Heroku deployment best practices.
 
+### Step-by-Step Deployment Using Heroku:
+
+To ensure the application can be replicated, the following steps outline how the project was deployed to Heroku from a local development environment to a live production environment.
+
+**1.Install and Log into Heroku**
+
+The Heroku CLI was installed, and the user logged into their Heroku account:
+
+heroku login
+
+**2. Create a New Heroku Application**
+
+A new Heroku app was created to host the project:
+
+heroku create money-map
+
+**3. Configure Environment Variables**
+
+Environment variables were configured to securely store sensitive data and production settings. This prevents hardcoding credentials in the project.
+
+The following variables were set:
+
+heroku config:set SECRET_KEY=your_secret_key
+heroku config:set DEBUG=False
+heroku config:set CLOUDINARY_URL=your_cloudinary_url
+
+Heroku automatically provides a DATABASE_URL when Postgres is added.
+
+**4. Set Up the Database**
+
+A Heroku Postgres database was added to the application:
+
+heroku addons:create heroku-postgresql:hobby-dev
+
+This database is automatically linked to Django via the DATABASE_URL environment variable.
+
+**5. Configure Buildpacks**
+
+Heroku automatically detects the Python environment using the requirements.txt and runtime.txt files.
+No additional buildpacks were required for this project.
+
+**6. Add Required Deployment Files**
+
+A Procfile was created to define how the application runs in production:
+
+web: gunicorn track_my_expenses.wsgi
+
+A runtime.txt file was also added to specify the Python version:
+
+python-3.12.8
+
+**7. Deploy the Application**
+
+The application was deployed by pushing the codebase to Heroku using Git:
+
+git push heroku main
+
+**8. Run Migrations and Collect Static Files**
+
+Database migrations were applied, and static files were collected for production:
+
+heroku run python manage.py migrate
+heroku run python manage.py collectstatic --noinput
+
+**9. Launch the Application**
+
+The deployed application was opened in the browser:
+
+heroku open
+
+### Summary:
+
+Following these steps ensured that the Django application was successfully deployed to Heroku with proper configuration of environment variables, database integration, and static file handling. This structured approach allows the deployment process to be replicated reliably by other developers.
+
 ### Deployment Issues and Resolutions
-1. Missing pkg_resources module (ModuleNotFoundError)
+**1. Missing pkg_resources module (ModuleNotFoundError)**
 
 The application initially failed to start due to a missing Python module: pkg_resources. This occurred because the setuptools package, which provides this module, was not correctly installed in the production environment.
 
 Resolution:
 The issue was resolved by adding setuptools and wheel to requirements.txt and ensuring they were correctly installed during deployment. This ensured compatibility between the production environment and project dependencies.
 
-2. Unsupported Python version on Heroku
+**2. Unsupported Python version on Heroku**
 
 Heroku initially defaulted to Python 3.14, which was not fully compatible with some project dependencies, including Gunicorn and other supporting libraries.
 
 Resolution:
 A runtime.txt file was created to explicitly specify Python 3.12.8, aligning the deployment environment with the local development setup. This ensured consistent behaviour across environments and resolved compatibility issues.
 
-3. DisallowedHost error at runtime
+**3. DisallowedHost error at runtime**
 
 The application returned a DisallowedHost error when accessed via the Heroku URL, indicating that the domain was not correctly configured in Django settings.
 
 Resolution:
 The Heroku app domain (money-map-422d80e8e44a.herokuapp.com) was added to the ALLOWED_HOSTS setting in settings.py, allowing Django to accept requests from the deployed environment.
 
-4. Heroku build cache conflicts
+**4. Heroku build cache conflicts**
 
 Repeated deployment failures occurred due to outdated or conflicting cached dependencies within the Heroku build system.
 
@@ -199,14 +277,10 @@ HTML and CSS were validated using W3C validation tools.
 
 <div style="display: flex; gap: 32px; align-items: flex-start; margin-bottom: 16px; justify-content: center;">
 	<div>
-		<img src="images/css.validator.png" width="480" alt="CSS Validator Screenshot" />
-		<p style="text-align:center; font-size:14px;">CSS Validator Screenshot</p>
-	</div>
-	<div>
-		<img src="images/html.validator.png" width="480" alt="HTML Validator Screenshot" />
-		<p style="text-align:center; font-size:14px;">HTML Validator Screenshot</p>
-	</div>
-</div>
+		<img src="images/css.validator.png" width="600" alt="CSS Validator Screenshot" />
+	<p style="text-align:center; font-size:14px;">CSS Validator Screenshot</p>
+	<img src="images/html.validator.png" width="600" alt="HTML Validator Screenshot" />
+	<p style="text-align:center; font-size:14px;">HTML Validator Screenshot</p>
 
 ## Agile Methodology
 
