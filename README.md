@@ -29,7 +29,7 @@ Money Map is designed to make financial tracking simple, insightful, and secure.
 
 ## Project Diagram
 
-<img src="images/Diagram.png" width="400" alt="Project Diagram" />
+<img src="images/Diagram.png" width="500" alt="Project Diagram" />
 
 The project diagram provides a high-level overview of the application's architecture and main components. It illustrates how different modules interact to deliver a seamless expense tracking experience.
 
